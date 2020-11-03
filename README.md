@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # project
 
 ## Project setup
@@ -24,3 +25,8 @@ npm run test
 ```
 npm run lint
 ```
+=======
+# phoenix.vop.web
+
+wm phoenix vop web
+>>>>>>> 351bfd40db3990543c2eadcb331e2ece803a9c39
