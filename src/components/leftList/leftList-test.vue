@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <LeftList 
+    :list='data'
+    /> 
+  </div>
+</template>
+<script>
+import LeftList from './leftList';
+export default {
+  data(){
+    return{
+      data:[
+        {
+          id:1,
+          to:'有效线索',
+          name:'effectivityThread',
+        },
+        {
+          id:2,
+          to:'特殊线索',
+          name:'specialThread',
+        },
+        {
+          id:3,
+          to:'高风险线索',
+          name:'highRiskThread',
+        },
+        {
+          id:4,
+          to:'无效线索',
+          name:'invalidThread',
+        },
+        {
+          id:5,
+          to:'战败线索',
+          name:'FailThread',
+        },
+        {
+          id:6,
+          to:'重复线索',
+          name:'RepetitionThread',
+        },
+        ],
+      
+    }
+  },
+  components:{LeftList}
+}
+</script>
