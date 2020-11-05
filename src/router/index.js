@@ -1,21 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// 线索管理
+/****线索管理*****/ 
 import EffectivityThread from '../pages/thread/components/effectivityThread.vue'
 import FailThread from '../pages/thread/components/failThread.vue'
 import HighRiskThread from '../pages/thread/components/HighRiskThread.vue'
 import InvalidThread from '../pages/thread/components/invalidThread.vue'
 import RepetitionThread from '../pages/thread/components/repetitionThread.vue'
 import SpecialThread from '../pages/thread/components/specialThread.vue'
-
-// 规则管理
+// 无效线索子路由
+import InvalidClue from '../pages/thread/components/invalidThread/InvalidClue.vue'
+import InvalidInformation from  '../pages/thread/components/invalidThread/InvalidInformation.vue'
+// 特殊消息子路由
+import MoblistThread from '../pages/thread/components/specialThread/MoblistThread.vue'
+import NoDisturbThread from '../pages/thread/components/specialThread/NoDisturbThread.vue'
+import WhiteListThread from '../pages/thread/components/specialThread/WhiteListThread.vue'
+/****规则管理***/ 
 import cityPoll from '../pages/rule/components/cityPoll.vue'
 import dealerRule from '../pages/rule/components/dealerRule.vue'
 import operationRulr from '../pages/rule/components/operationRulr.vue'
 import risk from '../pages/rule/components/risk.vue'
 import threadRecycle from '../pages/rule/components/threadRecycle.vue'
 
-// 线索流转监控
+/*****线索流转监控****/ 
 import  threadMonitoring from '../pages/threadMonitoring/components/threadMonitoring.vue'
 Vue.use(Router)
 export default new Router({
@@ -34,6 +40,7 @@ export default new Router({
         },
         {
             path:'/thread',
+            redirect:'/thread/有效线索',
             component:() => import('../pages/thread/thread.vue'),
             children :[
                 {
@@ -44,7 +51,25 @@ export default new Router({
                 {
                     path:'特殊线索',
                     name:'specialThread',
+                    redirect:'/thread/特殊线索/黑名单潜客线索',
                     component:SpecialThread,
+                    children:[
+                        {
+                            path:'黑名单潜客线索',
+                            name:'MoblistThread',
+                            component:MoblistThread,
+                        },
+                        {
+                            path:'白名单潜客线索',
+                            name:'WhiteListThread',
+                            component:WhiteListThread,
+                        },
+                        {
+                            path:'消息免打扰潜客线索',
+                            name:'NoDisturbThread',
+                            component:NoDisturbThread,
+                        },
+                    ]
                 },
                 {
                     path:'高风险线索',
@@ -55,6 +80,18 @@ export default new Router({
                     path:'无效线索',
                     name:'invalidThread',
                     component:InvalidThread,
+                    children:[
+                        {
+                            path:'信息无效线索',
+                            name:'InvalidInformation',
+                            component:InvalidInformation,
+                        },
+                        {
+                            path:'作废线索',
+                            name:'InvalidClue',
+                            component:InvalidClue,
+                        }
+                    ]
                 },
                 {
                     path:'重复线索',
@@ -70,6 +107,7 @@ export default new Router({
         },
         {
             path:'/thread_monitoring',
+            redirect:'/thread_monitoring/线索流转监控',
             component:() => import('../pages/threadMonitoring/threadMonitoring.vue') ,
             children:[
                 {
@@ -81,6 +119,7 @@ export default new Router({
         },
         {
             path:'/rule',
+            redirect:'/rule/业务条件规则配置',
             component:() => import('../pages/rule/rule.vue'),
             children:[
                 {

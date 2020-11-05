@@ -1,15 +1,14 @@
 <template>
   <div>
-    无效线索
+    信息无效线索
   </div>
 </template>
 <script>
-
 export default {
-  name:"invalidThread" ,
+  name:"InvalidInformation"
 }
 </script>
 
-<style lang="stylus">
+<style lang="scss" scoped>
 
 </style>

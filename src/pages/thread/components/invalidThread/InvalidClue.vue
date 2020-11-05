@@ -1,15 +1,14 @@
 <template>
   <div>
-    无效线索
+    作废线索
   </div>
 </template>
 <script>
-
 export default {
-  name:"invalidThread" ,
+  name:"InvalidClue"
 }
 </script>
 
-<style lang="stylus">
+<style lang="scss" scoped>
 
 </style>

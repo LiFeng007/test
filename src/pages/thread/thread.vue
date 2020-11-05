@@ -4,7 +4,10 @@
     <LeftList 
     :list="data"
     />
-    <router-view></router-view>
+    <div class="vop_thread_right">
+      <router-view></router-view>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -56,5 +59,9 @@ export default {
   .vop_thread{
     display: flex;
     height:calc(100% - 40px);
+    .vop_thread_right{
+      padding:20px 56px 18px 27px;
+      flex:1;
+    }
   }
 </style>

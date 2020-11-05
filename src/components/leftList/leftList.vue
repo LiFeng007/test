@@ -2,12 +2,12 @@
   <div class="vop_leftList">
    <ul>
       <router-link 
-    class="vop_leftList_item"
+    
     tag="li"
     v-for="(item) of list"
     :key="item.id"
     :to="{name:item.name}"
-    active-class="active"
+    active-class="router-link-active"
     >{{item.to}}</router-link>
     
    </ul>
@@ -47,7 +47,7 @@ export default {
         transition: all 0.5s;
         }
       }
-      .active{
+      .router-link-active{
         border: 1px solid #797979;
         background:#49586e;
         transition: all 0.5s;
