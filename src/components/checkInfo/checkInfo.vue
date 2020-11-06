@@ -12,6 +12,7 @@
           </span>
           <!-- type 类型为text -->
           <el-input 
+          ref="checkInfo"
           v-if="item.type === 'text'" 
           :value="item.value"
           :name="item.name"
@@ -24,31 +25,33 @@
            <el-select 
             v-if="item.type === 'select' && index === 4" 
             @change="$emit('on-change' , $event , item.name)"
-            v-model="value" 
+            v-on:change="getProv($event)"
+            v-model="selectProv" 
             filterable 
             :placeholder="item.placeholder"
             clearable
             >
             <el-option
-              v-for="item1 in options"
-              :key="item1.value"
-              :label="item1.label"
-              :value="item1.value">
+            :key="index"
+             v-for="(item1 , index) in provs"
+            :label="item1.label"
+            :value="item1.value">  
             </el-option>
         </el-select>
         <el-select 
           v-if="item.type === 'select' && index === 5" 
           @change="$emit('on-change' , $event , item.name)"
-           v-model="value2" 
+           v-on:change="getCity($event)"
+           v-model="selectCity" 
            filterable 
            :placeholder="item.placeholder"
            clearable
            >
             <el-option
-              v-for="item1 in options"
-              :key="item1.value"
-              :label="item1.label"
-              :value="item1.value">
+              v-for="(item , index) in citys"
+              :key="index"
+              :label="item.label"
+              :value="item.value">
             </el-option>
         </el-select>
       </div>
@@ -76,6 +79,8 @@
 </template>
 
 <script>
+// 省市联动数据
+import data from '../../static/city.json'
 export default {
   inject:['reloadAll'],
   props:{
@@ -94,37 +99,47 @@ export default {
   },
   data() {
       return {
-        options: [{
-          value: '黄金糕',
-          label: '黄金糕'
-        }, {
-          value: '双皮奶',
-          label: '双皮奶'
-        }, {
-          value: '蚵仔煎',
-          label: '蚵仔煎'
-        }, {
-          value: '龙须面',
-          label: '龙须面'
-        }, {
-          value: '北京烤鸭',
-          label: '北京烤鸭'
-        }],
-        value: '',
-        value2: '',
-
+        // 省市联动
+  provs:data.provs,
+citys: [],
+selectProv: '',
+selectCity: '',
+selectArea: '',
       }
     },
     mounted(){
-      console.log(this.list)
     },
     methods:{
       reset(){
-       this.$router.go(0)
-      //  this.$forceUpdate()
-      this.reloadAll()
+        this.$nextTick(() => {
+  //  this.$refs.checkInfo.resetFields()     
+  console.log(this.$refs)       
+ })
+      
       },
-     
+      getProv: function (prov) {
+        let tempCity=[];
+        this.citys=[];
+        this.selectCity='';
+        let allCity=data.allCity;
+        for (var val of allCity){
+          if (prov == val.prov){
+            tempCity.push({label: val.label, value: val.label})
+          }
+        }
+        this.citys = tempCity;
+        },
+        getCity: function (city) {
+          // console.log('getCity:' + city);
+          let allArea = data.allArea
+          this.selectArea='';
+          this.area = allArea.filter( item => item.city === city)
+          // console.log(this.selectCity)
+        },
+        getArea: function (area) {
+          // console.log('area');
+          // console.log(this.selectArea)
+        },
     },
     
 }

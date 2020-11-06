@@ -13,16 +13,127 @@
         @query='query'
         />
     <!-- 检索列表 -->
-    <Search-list />
+    <div class="vop_serarchList">
+     <el-table
+      height="420"
+      :data="tableData"
+      style="width: 100% ; margin-top:20px;"
+    >
+    <el-table-column
+      fixed
+      type="selection"
+      label="选择"
+      width="80">
+      <!-- <template slot-scope="scope"
+      border
+      v-if="headerList[index] === '选择' "
+      class="vop_serarchList_checkbox"
+      >
+        <el-checkbox @click="handleClick(scope.row)"></el-checkbox>
+      </template> -->
+    </el-table-column>
+    <el-table-column
+      prop="threadId"
+      label="线索ID"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="type"
+      label="线索类型"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="VopId"
+      label="VOP ID"
+      width="120">
+    </el-table-column>
+    
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="phone"
+      label="手机号"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="province"
+      label="意向省份"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="city"
+      label="意向城市"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="origin"
+      label="来源渠道"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="date"
+      label="上报时间"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="evaluate"
+      label="业务评价"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="empower"
+      label="是否完成授权"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      fixed="right"
+      label="操作"
+      width="120">
+      <template slot-scope="scope">
+        <el-button
+          @click.native.prevent="threadInfo(scope.row.VopId, tableData)"
+          type="text"
+          size="small">
+          查看
+        </el-button>
+        <el-button
+          @click.native.prevent="issue(scope.$index, tableData)"
+          type="text"
+          size="small">
+          下发
+        </el-button>
+        <el-button
+          @click.native.prevent="handleRow(scope.row.VopId, tableData)"
+          type="text"
+          size="small">
+          导出
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+    </div>
     <!-- 分页 -->
     <Pag-ing />
+    <router-view></router-view>
   </div>
 </template>
 <script>
+// 组件
 import HeaderInfo from '../../../components/headerInfo/headerInfo'
 import CheckInfo from '../../../components/checkInfo/checkInfo'
 import SearchList from '../../../components/searchList/searchList-test'
 import PagIng from '../../../components/paging/paging-test'
+
 export default {
   name:"effectivityThread",
   data(){
@@ -33,21 +144,120 @@ export default {
       origin:'',
       province:'',
       city:'',
-      checkInfoList:[]
+      checkInfoList:[],
+     tableData:[{
+          threadId: '11001',
+          date: '2016-05-01',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }, {
+          threadId: '11001',
+          date: '2016-05-02',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }, {
+          threadId: '11001',
+          date: '2016-05-04',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }, {
+          threadId: '11001',
+          date: '2016-05-01',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }, {
+          threadId: '11001',
+          date: '2016-05-08',
+          VopId: '威马005',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+
+        }, {
+          threadId: '11001',
+          date: '2016-05-06',
+          VopId: '威马001',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }, {
+          threadId: '11001',
+          date: '2016-05-07',
+          VopId: '威马000',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是'
+        }]
     }
   },
   mounted(){
     this.getCheckInfo()
   },
   beforeupdate(){
-    console.log(this.origin)
-    console.log('beforeupdate')
     this.getCheckInfo()
   },
   methods:{
-    // 导出业务
+    // 导出业务 ==> 批导
     vopExport(){
       alert('确定导出吗')
+    },
+    // 导出业务 ==> 单个
+    handleRow(index, rows){
+        console.log( '单个导出',index, rows[index])
+    },
+    // 详情页
+    threadInfo(index , rows){
+        console.log('详情页跳转',index, rows[index])
+        this.$router.push({name:'threadInfo', query: { id: index }})
+    },
+    // 下发
+    issue(index , rows){
+      this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
+          dangerouslyUseHTMLString: true
+        });
     },
     // 高级检索业务
     retrieval(event){
@@ -72,9 +282,12 @@ export default {
         {items:'意向城市',placeholder:'请选择',type:'select',value:this.city ,name:'city'},
       ]
     },
-  
+     deleteRow(index, rows) {
+        // rows.splice(index, 1);
+        console.log(index, rows)
+      }
   },
-  components:{HeaderInfo , CheckInfo , SearchList , PagIng}
+  components:{HeaderInfo , CheckInfo  , PagIng}
 }
 </script>
 

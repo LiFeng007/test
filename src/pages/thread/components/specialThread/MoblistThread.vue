@@ -15,103 +15,171 @@
     @query='query'
     />
     <!-- 主内容区 -->
-    <el-table
-    :data="tableData"
-    border
-    style="width: 100%">
+    <div class="vop_serarchList vop_moblist_serarchList">
+     <el-table
+      height="370"
+      :data="tableData"
+      style="width: 100% ; margin-top:20px;"
+    >
     <el-table-column
       fixed
-      prop="date"
-      label="日期"
-      width="150">
+      prop="threadId"
+      label="线索ID"
+      width="120">
     </el-table-column>
+
+    <el-table-column
+      prop="type"
+      label="线索类型"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="VopId"
+      label="VOP ID"
+      width="120">
+    </el-table-column>
+    
     <el-table-column
       prop="name"
       label="姓名"
       width="120">
     </el-table-column>
+
+    <el-table-column
+      prop="phone"
+      label="手机号"
+      width="120">
+    </el-table-column>
+
     <el-table-column
       prop="province"
-      label="省份"
+      label="意向省份"
       width="120">
     </el-table-column>
+
     <el-table-column
       prop="city"
-      label="市区"
+      label="意向城市"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="origin"
+      label="来源渠道"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="platform"
+      label="来源平台"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="date"
+      label="上报时间"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="地址"
-      width="300">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
+      prop="evaluate"
+      label="业务评价"
       width="120">
     </el-table-column>
+    <el-table-column
+      prop="empower"
+      label="是否完成授权"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      prop="marks"
+      label="备注"
+      width="120">
+    </el-table-column>
+
     <el-table-column
       fixed="right"
       label="操作"
-      width="100">
+      width="120">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-        <el-button type="text" size="small">编辑</el-button>
+        <el-button
+          @click.native.prevent="threadInfo(scope.row.VopId, tableData)"
+          type="text"
+          size="small">
+          查看
+        </el-button>
+        <el-button
+          @click.native.prevent="del(scope.$index, tableData)"
+          type="text"
+          size="small">
+          移出
+        </el-button>
+        <el-button
+          @click.native.prevent="handleRow(scope.row.VopId, tableData)"
+          type="text"
+          size="small">
+          下发
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
-    黑名单潜客线索
+    </div>
+    <Pag-ing 
+    :count="40"
+    :start="10"
+    :end="20"
+    />
   </div>
 </template>
 
 <script>
 import HeaderInfo from '../../../../components/headerInfo/headerInfo' 
 import CheckInfo from '../../../../components/checkInfo/checkInfo'
+import PagIng from '../../../../components/paging/paging'
 export default {
   name:"MoblistThread",
   data(){
     return{
       // 检索信息
-       threadId:'',
+      threadId:'',
       VopId:'',
       phone:'',
       origin:'',
       province:'',
       city:'',
       checkInfoList:[],
-        tableData: [{
-          label:"操作",
-          data:{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-          }
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        }, {
+      tableData: [
+        {
+          threadId: '11001',
           date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
         }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        }]
+          threadId: '11001',
+          date: '2016-05-02',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
+        }
+      ]
     }
   },
   methods:{
@@ -121,7 +189,7 @@ export default {
     retrieval(event){
       console.log('选择了高级检索' , event.target)
     },
-    // 信息检索去相关方法
+    // 信息检索相关方法
     onChange(event){
       this[event[1]] = event[0]
     },
@@ -130,6 +198,34 @@ export default {
     },
     check(e){
       console.log(e)
+    },
+    // 查看 ==> 详情页面
+    threadInfo(vopId){
+      // console.log(this.$route.path)
+        this.$router.push({path:this.$route.path + '/线索详情', query: { id: vopId }})
+    },
+    // 移出
+    del(index , row){
+        this.$confirm('此操作将永久删除该线索, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          row.splice(index , 1) 
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消移出'
+          });
+        })
+    },
+    // 下发
+    handleRow(){
+
     },
     setCheckInfoList(){
      this.checkInfoList =  [
@@ -148,12 +244,15 @@ export default {
   created(){
     this.setCheckInfoList()
   },
-  components:{HeaderInfo , CheckInfo}
+  components:{HeaderInfo , CheckInfo ,PagIng }
 }
 </script>
 
 <style lang="scss" scoped>
   .vop_MoblistThread{
     margin-top:15px;
+  }
+  .vop_moblist_serarchList{
+    height:370px;
   }
 </style>

@@ -6,7 +6,8 @@ html,body{
     height:100%;
     /* font-size: 26.6vw; */
     background:#f0f2f5;
-    font-family: 'Arial Normal', 'Arial';
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    text-decoration: none;
 }
 
 h1,h2,h3,h4,h5,h6,th{

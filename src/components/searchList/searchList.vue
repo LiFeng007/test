@@ -9,20 +9,21 @@
     <el-table-column
      v-for="(item , index) of headerList"
       :key="index"
-      :prop="tableData[1].name"
+      :prop="item"
       :label="item"
       width="170"
       >
 
       <template slot-scope="scope"
       border
-      v-if="headerList[index] === '选择' "
       class="vop_serarchList_checkbox"
+      @click="handleClick(scope)"
       >
-        <el-checkbox @click="handleClick(scope.row)"></el-checkbox>
+        <!-- <el-checkbox @click="handleClick(scope.row)"></el-checkbox> -->
+        <span>{{scope.row}}</span>
       </template>
-      
     </el-table-column>
+    
     <!-- 内容 -->
 
     <!-- 操作 -->
@@ -35,13 +36,24 @@
       <template slot-scope="scope"
       border
       >
+      <!-- 操作栏按钮1 -->
         <el-button
-        v-for="(item , index) of operation"
-        :key="index"
         type="text"
         size="small"
-        @click="$emit(Number(`operation${index+1}`.substr(`operation${index+1}`.length-1 , 1)) === index ? `operation${index+1}` : '', $event , scope)"
-        >{{operation[index]}}</el-button>
+        @click="$emit('but1-click', $event , scope , tableData)"
+        >{{but1}}</el-button>
+        <!-- 操作栏按钮2 -->
+        <el-button
+        type="text"
+        size="small"
+        @click="$emit('but2-click', $event , scope , tableData)"
+        >{{but2}}</el-button>
+        <!-- 操作栏按钮3 -->
+        <el-button
+        type="text"
+        size="small"
+        @click="$emit('but3-click', $event , scope , tableData)"
+        >{{but3}}</el-button>
       </template>
     </el-table-column>
 
@@ -61,11 +73,28 @@ export default {
       required:true,
       default:null
     },
-    // 操作按钮字段
+    // 内容列表
+    // tableData:{
+    //   type:Array,
+    //   re
+    // },
+    // 操作栏目显示与否
     operation:{
-      type:Array , 
-      required:false,
-      default:null
+      type:Boolean , 
+      default:true
+    },
+    // 按钮显示文字
+    but1:{
+      type:String,
+      default:null,
+    },
+    but2:{
+      type:String,
+      default:null,
+    },
+    but3:{
+      type:String,
+      default:null,
     }
   },
   data(){
@@ -119,7 +148,7 @@ export default {
     margin-top:15px;
     background:white;
     height:420px;
-    overflow: auto;
+    // overflow: auto;
     // overflow:scroll ;
   }
 
@@ -132,6 +161,9 @@ export default {
   .el-table th, .el-table tr{
     width:240px;
   }
+  // .el-table tr{
+  //   color:#02aff4;
+  // }
   // .el-table .cell{
   //   font-size:17px;
   //   color:#7f7f7f;

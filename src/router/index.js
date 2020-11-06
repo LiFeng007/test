@@ -14,6 +14,9 @@ import InvalidInformation from  '../pages/thread/components/invalidThread/Invali
 import MoblistThread from '../pages/thread/components/specialThread/MoblistThread.vue'
 import NoDisturbThread from '../pages/thread/components/specialThread/NoDisturbThread.vue'
 import WhiteListThread from '../pages/thread/components/specialThread/WhiteListThread.vue'
+// 有效线索子路由
+import threadInfo from '../pages/thread/components/effectivityThread/threadInfo.vue'
+
 /****规则管理***/ 
 import cityPoll from '../pages/rule/components/cityPoll.vue'
 import dealerRule from '../pages/rule/components/dealerRule.vue'
@@ -49,6 +52,11 @@ export default new Router({
                     component:EffectivityThread,
                 },
                 {
+                    path:'/thread/有效线索/线索详情',
+                    name:'threadInfo',
+                    component:threadInfo
+                },
+                {
                     path:'特殊线索',
                     name:'specialThread',
                     redirect:'/thread/特殊线索/黑名单潜客线索',
@@ -60,14 +68,29 @@ export default new Router({
                             component:MoblistThread,
                         },
                         {
+                            path:'/thread/特殊线索/黑名单潜客线索/线索详情',
+                            name:'threadInfo',
+                            component:threadInfo
+                        },
+                        {
                             path:'白名单潜客线索',
                             name:'WhiteListThread',
                             component:WhiteListThread,
                         },
                         {
+                            path:'/thread/特殊线索/白名单潜客线索/线索详情',
+                            name:'threadInfo',
+                            component:threadInfo
+                        },
+                        {
                             path:'消息免打扰潜客线索',
                             name:'NoDisturbThread',
                             component:NoDisturbThread,
+                        },
+                        {
+                            path:'/thread/特殊线索/消息免打扰潜客线索/线索详情',
+                            name:'threadInfo',
+                            component:threadInfo
                         },
                     ]
                 },
