@@ -9,7 +9,6 @@
     />
      <!-- 检索信息填写区域 -->
     <Check-info 
-    :list='checkInfoList'
     @on-change='onChange(arguments)'
     @query='query'
     />
@@ -131,20 +130,13 @@
 
 
 <script>
-import HeaderInfo from '../../../../components/headerInfo/headerInfo' 
-import CheckInfo from '../../../../components/checkInfo/checkInfo'
-import PagIng from '../../../../components/paging/paging'
+import HeaderInfo from '@/components/headerInfo/headerInfo' 
+import CheckInfo from '@/components/checkInfo/checkInfo'
+import PagIng from '@/components/paging/paging'
 export default {
   name:"NoDisturbThread",
   data(){
     return{
-       threadId:'',
-      VopId:'',
-      phone:'',
-      origin:'',
-      province:'',
-      city:'',
-      checkInfoList:[],
       tableData: [
         {
           threadId: '11001',
@@ -193,16 +185,6 @@ export default {
     check(e){
       console.log(e)
     },
-    setCheckInfoList(){
-     this.checkInfoList =  [
-        {items:'线索ID',placeholder:'请输入线索ID',type:'text' ,value:this.threadId,name:'threadId'},
-        {items:'VOP ID',placeholder:'请输入VOP ID',type:'text' ,value:this.VopId ,name:'VopId'},
-        {items:'手机号',placeholder:'请输入手机号',type:'text' ,value:this.phone ,name:'phone'},
-        {items:'来源渠道',placeholder:'请输入来源渠道名称',type:'text' , value:this.origin,name:'origin'},
-        {items:'意向省份',placeholder:'请选择',type:'select' ,value:this.province ,name:'province'},
-        {items:'意向城市',placeholder:'请选择',type:'select',value:this.city ,name:'city'},
-      ]
-    },
      threadInfo(vopId){
       // console.log(this.$route.path)
         this.$router.push({path:this.$route.path + '/线索详情', query: { id: vopId }})
@@ -213,7 +195,6 @@ export default {
     },
   },
    created(){
-    this.setCheckInfoList()
   },
   components:{HeaderInfo , CheckInfo , PagIng}
 }

@@ -7,7 +7,7 @@
     v-for="(item) of list"
     :key="item.id"
     :to="{name:item.name}"
-    active-class="router-link-active"
+    active-class="active"
     >{{item.to}}</router-link>
     
    </ul>
@@ -32,7 +32,7 @@ export default {
     .vop_leftList{
       height:100%;
       ul{
-        width:230px;
+      width:230px;
       background:#d7dbdf;
       height:calc(100% - 55px);
       text-align: center;
@@ -47,7 +47,7 @@ export default {
         transition: all 0.5s;
         }
       }
-      .router-link-active{
+      .active{
         border: 1px solid #797979;
         background:#49586e;
         transition: all 0.5s;

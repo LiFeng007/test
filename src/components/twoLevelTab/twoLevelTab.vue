@@ -6,7 +6,7 @@
     <router-link
     v-for="(item  , index) of routeInfo"
     :key ="index"
-    :to="item.to"
+    :to="{path:item.to , params:item.to}"
     tag="div"
     active-class="active"
     >{{item.name}}</router-link>
@@ -40,9 +40,7 @@ export default {
     div{
       min-width:146px;
       text-align: center;
-      
-        margin-left:20px;
-  
+     margin-left:20px;
       font-size:17px;
       line-height: 39px;
       color:#333333;

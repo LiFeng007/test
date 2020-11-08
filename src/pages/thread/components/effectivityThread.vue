@@ -7,15 +7,11 @@
      text="有效线索列表"
     />
     <!-- 检索信息输入 -->
-      <Check-info 
-        :list='checkInfoList'
-        @on-change='onChange(arguments)'
-        @query='query'
-        />
+    <Check-info/>
     <!-- 检索列表 -->
     <div class="vop_serarchList">
      <el-table
-      height="420"
+      height="400"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
     >
@@ -24,13 +20,7 @@
       type="selection"
       label="选择"
       width="80">
-      <!-- <template slot-scope="scope"
-      border
-      v-if="headerList[index] === '选择' "
-      class="vop_serarchList_checkbox"
-      >
-        <el-checkbox @click="handleClick(scope.row)"></el-checkbox>
-      </template> -->
+      
     </el-table-column>
     <el-table-column
       prop="threadId"
@@ -129,11 +119,11 @@
 </template>
 <script>
 // 组件
-import HeaderInfo from '../../../components/headerInfo/headerInfo'
-import CheckInfo from '../../../components/checkInfo/checkInfo'
-import SearchList from '../../../components/searchList/searchList-test'
-import PagIng from '../../../components/paging/paging-test'
-
+import HeaderInfo from '@/components/headerInfo/headerInfo'
+import CheckInfo from '@/components/checkInfo/checkInfo'
+import SearchList from '@/components/searchList/searchList-test'
+import PagIng from '@/components/paging/paging-test'
+import {mapState} from 'vuex'
 export default {
   name:"effectivityThread",
   data(){
@@ -234,10 +224,14 @@ export default {
     }
   },
   mounted(){
-    this.getCheckInfo()
   },
   beforeupdate(){
-    this.getCheckInfo()
+  },
+  computed:{
+    ...mapState([
+      'serarchList'
+    ])
+    
   },
   methods:{
     // 导出业务 ==> 批导
@@ -263,24 +257,9 @@ export default {
     retrieval(event){
       console.log('选择了高级检索' , event.target)
     },
-    // 检索信息输入改变data元数据方法 ==> [PS]此处并不是双绑,待修改
-     onChange(event){
-      this[event[1]] = event[0]
-    },
     // 信息输入完成检索业务
     query(e){
-      console.log(e)
-    },
-    // 获取检索信息
-    getCheckInfo(){
-      this.checkInfoList = [
-        {items:'线索ID',placeholder:'请输入线索ID',type:'text' ,value:this.threadId,name:'threadId'},
-        {items:'VOP ID',placeholder:null,type:'text' ,value:this.VopId ,name:'VopId'},
-        {items:'手机号',placeholder:null,type:'text' ,value:this.phone ,name:'phone'},
-        {items:'来源渠道',placeholder:null,type:'text' , value:this.origin,name:'origin'},
-        {items:'意向省份',placeholder:'请选择',type:'select' ,value:this.province ,name:'province'},
-        {items:'意向城市',placeholder:'请选择',type:'select',value:this.city ,name:'city'},
-      ]
+      console.log(e[0] , e[1])
     },
      deleteRow(index, rows) {
         // rows.splice(index, 1);

@@ -9,17 +9,12 @@
       text="黑名单潜客线索"
     />
     <!-- 检索信息填写区域 -->
-    <Check-info 
-    :list='checkInfoList'
-    @on-change='onChange(arguments)'
-    @query='query'
-    />
+    <Check-info />
     <!-- 主内容区 -->
     <div class="vop_serarchList vop_moblist_serarchList">
      <el-table
       height="370"
       :data="tableData"
-      style="width: 100% ; margin-top:20px;"
     >
     <el-table-column
       fixed
@@ -134,21 +129,13 @@
 </template>
 
 <script>
-import HeaderInfo from '../../../../components/headerInfo/headerInfo' 
-import CheckInfo from '../../../../components/checkInfo/checkInfo'
-import PagIng from '../../../../components/paging/paging'
+import HeaderInfo from '@/components/headerInfo/headerInfo' 
+import CheckInfo from '@/components/checkInfo/checkInfo'
+import PagIng from '@/components/paging/paging'
 export default {
   name:"MoblistThread",
   data(){
     return{
-      // 检索信息
-      threadId:'',
-      VopId:'',
-      phone:'',
-      origin:'',
-      province:'',
-      city:'',
-      checkInfoList:[],
       tableData: [
         {
           threadId: '11001',
@@ -206,7 +193,7 @@ export default {
     },
     // 移出
     del(index , row){
-        this.$confirm('此操作将永久删除该线索, 是否继续?', '提示', {
+        this.$confirm('移出此线索, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -227,22 +214,11 @@ export default {
     handleRow(){
 
     },
-    setCheckInfoList(){
-     this.checkInfoList =  [
-        {items:'线索ID',placeholder:'请输入线索ID',type:'text' ,value:this.threadId,name:'threadId'},
-        {items:'VOP ID',placeholder:null,type:'text' ,value:this.VopId ,name:'VopId'},
-        {items:'手机号',placeholder:null,type:'text' ,value:this.phone ,name:'phone'},
-        {items:'来源渠道',placeholder:null,type:'text' , value:this.origin,name:'origin'},
-        {items:'意向省份',placeholder:'请选择',type:'select' ,value:this.province ,name:'province'},
-        {items:'意向城市',placeholder:'请选择',type:'select',value:this.city ,name:'city'},
-      ]
-    },
     handleClick(row) {
         console.log(row);
       }
   },
   created(){
-    this.setCheckInfoList()
   },
   components:{HeaderInfo , CheckInfo ,PagIng }
 }
@@ -253,6 +229,8 @@ export default {
     margin-top:15px;
   }
   .vop_moblist_serarchList{
+    // -moz-height:360px;
     height:370px;
+    margin-top:20px;
   }
 </style>

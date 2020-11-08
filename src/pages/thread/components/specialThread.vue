@@ -3,12 +3,13 @@
     <!-- ta切换特殊线索类型 -->
     <TwoLevelTab 
     :routeInfo="routeInfo"
+    v-if="$store.state.threeTabStatus"
     />
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 <script>
-import TwoLevelTab from '../../../components/twoLevelTab/twoLevelTab'
+import TwoLevelTab from '@/components/twoLevelTab/twoLevelTab'
 export default {
   name:"specialThread",
   data(){
@@ -19,8 +20,9 @@ export default {
         {name:'白名单潜客线索' , to: '/thread/特殊线索/白名单潜客线索'},
         {name:'消息免打扰潜客线索' , to:'/thread/特殊线索/消息免打扰潜客线索'},
     ],
-    
   }
+  },
+  mounted(){
   },
   components:{TwoLevelTab}
 }

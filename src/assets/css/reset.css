@@ -64,3 +64,23 @@ a{text-decoration:none;}
     }
 }
 
+
+/* 修改一些element样式 */
+.el-collapse-item__header {
+    background: #b9ced8;
+    padding-left:15px;
+}
+.el-dialog__title{
+    font-size: 14px;
+}
+.el-dialog{
+    padding:0 15px;
+    height:250px;
+    width:400px;
+}
+.el-dialog__body{
+    padding:0;
+}
+.el-collapse-item__wrap{
+    background:#f0f2f5 ;
+}

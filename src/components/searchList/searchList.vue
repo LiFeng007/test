@@ -147,9 +147,7 @@ export default {
     width:1220px;
     margin-top:15px;
     background:white;
-    height:420px;
-    // overflow: auto;
-    // overflow:scroll ;
+    // height:420px;
   }
 
   // 修改一些element样式

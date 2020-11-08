@@ -59,9 +59,11 @@ export default {
   .vop_thread{
     display: flex;
     height:calc(100% - 40px);
+    overflow: hidden;
     .vop_thread_right{
-      padding:20px 56px 18px 27px;
+      padding:20px 56px 0 27px;
       flex:1;
+      overflow-y: auto;
     }
   }
 </style>

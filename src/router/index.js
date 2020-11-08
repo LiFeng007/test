@@ -14,8 +14,8 @@ import InvalidInformation from  '../pages/thread/components/invalidThread/Invali
 import MoblistThread from '../pages/thread/components/specialThread/MoblistThread.vue'
 import NoDisturbThread from '../pages/thread/components/specialThread/NoDisturbThread.vue'
 import WhiteListThread from '../pages/thread/components/specialThread/WhiteListThread.vue'
-// 有效线索子路由
-import threadInfo from '../pages/thread/components/effectivityThread/threadInfo.vue'
+// 线索管理详情页
+import detail from '@/pages/thread/detail'
 
 /****规则管理***/ 
 import cityPoll from '../pages/rule/components/cityPoll.vue'
@@ -28,6 +28,7 @@ import threadRecycle from '../pages/rule/components/threadRecycle.vue'
 import  threadMonitoring from '../pages/threadMonitoring/components/threadMonitoring.vue'
 Vue.use(Router)
 export default new Router({
+    mode: 'history',
     routes:[
         {
             path:'/',
@@ -43,6 +44,7 @@ export default new Router({
         },
         {
             path:'/thread',
+            name:'threadInfo',
             redirect:'/thread/有效线索',
             component:() => import('../pages/thread/thread.vue'),
             children :[
@@ -54,7 +56,7 @@ export default new Router({
                 {
                     path:'/thread/有效线索/线索详情',
                     name:'threadInfo',
-                    component:threadInfo
+                    component:detail
                 },
                 {
                     path:'特殊线索',
@@ -69,8 +71,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/黑名单潜客线索/线索详情',
-                            name:'threadInfo',
-                            component:threadInfo
+                            component:detail
                         },
                         {
                             path:'白名单潜客线索',
@@ -79,8 +80,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/白名单潜客线索/线索详情',
-                            name:'threadInfo',
-                            component:threadInfo
+                            component:detail
                         },
                         {
                             path:'消息免打扰潜客线索',
@@ -89,8 +89,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/消息免打扰潜客线索/线索详情',
-                            name:'threadInfo',
-                            component:threadInfo
+                            component:detail
                         },
                     ]
                 },
@@ -98,6 +97,10 @@ export default new Router({
                     path:'高风险线索',
                     name:'highRiskThread',
                     component:HighRiskThread,
+                },
+                {
+                    path:'/thread/高风险线索/线索详情',
+                    component:detail
                 },
                 {
                     path:'无效线索',

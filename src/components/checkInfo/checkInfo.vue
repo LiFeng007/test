@@ -2,33 +2,34 @@
     <div class="vop_checkInfo">
       <!-- 主内容区 -->
      <div class="vop_checkInfo_main">
-        <div 
-          class="vop_checkInfo_item"
-          v-for="(item , index) of list"
-          :key="index"
-          >
-          <span class="vop_checkInfo_items">
-            {{item.items}}
-          </span>
-          <!-- type 类型为text -->
-          <el-input 
-          ref="checkInfo"
-          v-if="item.type === 'text'" 
-          :value="item.value"
-          :name="item.name"
-          v-model="item.value"
-          @input="$emit('on-change' , $event , item.name)"
-          :placeholder="item.placeholder"
-          />
-
-          <!-- type类型为select -->
-           <el-select 
-            v-if="item.type === 'select' && index === 4" 
-            @change="$emit('on-change' , $event , item.name)"
+       <!-- 线索ID -->
+    <div class="vop_checkInfo_item">
+      <span class="vop_checkInfo_items">线索ID</span>
+      <el-input v-model="threadId" placeholder="请输入内容"></el-input>
+    </div>
+    <!-- VOP ID -->
+    <div class="vop_checkInfo_item">
+      <span class="vop_checkInfo_items">VOP ID</span>
+      <el-input v-model="VopId" placeholder="请输入内容"></el-input>
+    </div>
+    <!-- 手机号 -->
+    <div class="vop_checkInfo_item">
+      <span class="vop_checkInfo_items">手机号</span>
+      <el-input v-model="phone" placeholder="请输入内容"></el-input>
+    </div>
+    <!-- 来源渠道 -->
+    <div class="vop_checkInfo_item">
+      <span class="vop_checkInfo_items">来源渠道</span>
+      <el-input v-model="origin" placeholder="请输入内容"></el-input>
+    </div>
+    <!-- 意向省份 -->
+     <div class="vop_checkInfo_item">
+       <span class="vop_checkInfo_items">意向省份</span>
+       <el-select 
             v-on:change="getProv($event)"
             v-model="selectProv" 
             filterable 
-            :placeholder="item.placeholder"
+            placeholder="请选择"
             clearable
             >
             <el-option
@@ -38,13 +39,15 @@
             :value="item1.value">  
             </el-option>
         </el-select>
-        <el-select 
-          v-if="item.type === 'select' && index === 5" 
-          @change="$emit('on-change' , $event , item.name)"
+     </div>
+     <!-- 意向城市 -->
+        <div class="vop_checkInfo_item">
+          <span class="vop_checkInfo_items">意向城市</span>
+          <el-select 
            v-on:change="getCity($event)"
            v-model="selectCity" 
            filterable 
-           :placeholder="item.placeholder"
+           placeholder="请选择"
            clearable
            >
             <el-option
@@ -54,20 +57,18 @@
               :value="item.value">
             </el-option>
         </el-select>
-      </div>
-<!-- 重置&&查询 -->
+        </div>
+     <!-- 重置&&查询 -->
   <div class="vop_checkInfo_query">
       <el-button
       class="vop_checkInfo_button"
-        v-if="isReset"
         size="small"
         type="primary"
-        @click="$emit('query' , $event)"
+        @click="getList"
       >查询</el-button>
       <br />
       <el-button
         class="vop_checkInfo_button"
-        v-if="isQuery"
         size="small"
         style="margin-top:20px"
         @click="reset"
@@ -80,43 +81,46 @@
 
 <script>
 // 省市联动数据
-import data from '../../static/city.json'
+import data from '@/static/city.json'
+// 状态管理
+import * as types from '@/store/types'
 export default {
   inject:['reloadAll'],
-  props:{
-    list:{
-      type:Array,
-      required:true,
-    },
-    isQuery:{
-      type:Boolean,
-      default:true
-    },
-     isReset:{
-      type:Boolean,
-      default:true
-    },
-  },
   data() {
       return {
         // 省市联动
-  provs:data.provs,
-citys: [],
-selectProv: '',
-selectCity: '',
-selectArea: '',
+        provs:data.provs,
+        citys: [],
+        // 输入信息元数据
+        threadId:'',
+        VopId:'',
+        phone:'',
+        origin:'',
+        selectProv: '',
+        selectCity: '',
+        selectArea: '',
       }
     },
     mounted(){
     },
     methods:{
-      reset(){
-        this.$nextTick(() => {
-  //  this.$refs.checkInfo.resetFields()     
-  console.log(this.$refs)       
- })
-      
+      // 请求数据
+      async getList(){
+        console.log('求库')
+       let res = await this.$http.post('http://47.116.74.91:3003/users/login', {
+                username: this.username,
+                password: this.password
+            })
+        this.$store.commit(types.UPDATE_SERARCHLIST , res.data)
       },
+      // 重置
+      reset(){
+        if(this.VopId !== "" || this.threadId !== "" || this.phone !== "" || this.origin !== "" || this.selectProv !== "" || this.selectCity !== ""){
+        this.VopId = this.threadId = this.phone = this.origin = this.selectProv = this.selectCity = ""
+        this.$message('重置成功');
+        }
+      },
+      // 省市联动
       getProv: function (prov) {
         let tempCity=[];
         this.citys=[];
