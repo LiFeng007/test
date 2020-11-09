@@ -24,8 +24,11 @@ export default {
   data(){
     return{}
   },
+  created(){
+     this.$router.push({path:decodeURI(this.$route.path)})
+  },
   methods:{
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

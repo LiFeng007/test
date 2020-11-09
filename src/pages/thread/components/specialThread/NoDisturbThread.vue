@@ -1,6 +1,6 @@
 <template>
   <div>
-      <!-- 组件头部信息 -->
+    <!-- 组件头部信息 -->
     <Header-info 
      @retrieval="retrieval"
     class="vop_MoblistThread vop_whiteList_headerInfo"
@@ -8,13 +8,11 @@
     :ifExport="false"
     />
      <!-- 检索信息填写区域 -->
-    <Check-info 
-    @on-change='onChange(arguments)'
-    @query='query'
-    />
+    <Check-info/>
+    <!-- 主内容 -->
     <div class="vop_serarchList vop_moblist_serarchList">
      <el-table
-      height="370"
+      height="360"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
     >
@@ -109,7 +107,7 @@
           查看
         </el-button>
         <el-button
-          @click.native.prevent="handleRow(scope.row.VopId, tableData)"
+          @click.native.prevent="issue(scope.$index, tableData)"
           type="text"
           size="small">
           下发
@@ -124,6 +122,12 @@
     :start="10"
     :end="20"
     />
+    <!-- 下发弹出框 -->
+    <Issue 
+    :dialogVisible="dialogVisible"
+    @setdialog-visible="setdialogVisible"
+    :vopId="vopId"
+    />
   </div>
   
 </template>
@@ -133,10 +137,14 @@
 import HeaderInfo from '@/components/headerInfo/headerInfo' 
 import CheckInfo from '@/components/checkInfo/checkInfo'
 import PagIng from '@/components/paging/paging'
+import Issue from '@/components/Issue/issue.vue'
+
 export default {
   name:"NoDisturbThread",
   data(){
     return{
+    vopId:'',
+     dialogVisible:false, 
       tableData: [
         {
           threadId: '11001',
@@ -175,31 +183,32 @@ export default {
     retrieval(event){
       console.log('选择了高级检索' , event.target)
     },
-    // 信息检索相关方法
-    onChange(event){
-      this[event[1]] = event[0]
-    },
-    query(e){
-      console.log(e)
-    },
-    check(e){
-      console.log(e)
-    },
+    // 详情
      threadInfo(vopId){
       // console.log(this.$route.path)
         this.$router.push({path:this.$route.path + '/线索详情', query: { id: vopId }})
     },
      // 下发
-    handleRow(){
-
+      issue(index , rows){
+      this.dialogVisible = true
+      this.vopId = rows[index].VopId
+    },
+    setdialogVisible(payload){
+      this.dialogVisible = false
     },
   },
    created(){
   },
-  components:{HeaderInfo , CheckInfo , PagIng}
+  components:{HeaderInfo , CheckInfo , PagIng , Issue}
 }
 </script>
 
 <style lang="scss" scoped>
-
+.vop_whiteList_headerInfo{
+  margin-top:15px;
+  margin-bottom:10px;
+}
+.vop_moblist_serarchList{
+  margin-top:10px;
+}
 </style>

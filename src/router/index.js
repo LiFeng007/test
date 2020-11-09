@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueRouter from 'vue-router'
 /****线索管理*****/ 
 import EffectivityThread from '../pages/thread/components/effectivityThread.vue'
 import FailThread from '../pages/thread/components/failThread.vue'
@@ -71,7 +72,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/黑名单潜客线索/线索详情',
-                            component:detail
+                            component:detail,
                         },
                         {
                             path:'白名单潜客线索',
@@ -80,7 +81,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/白名单潜客线索/线索详情',
-                            component:detail
+                            component:detail,
                         },
                         {
                             path:'消息免打扰潜客线索',
@@ -89,7 +90,7 @@ export default new Router({
                         },
                         {
                             path:'/thread/特殊线索/消息免打扰潜客线索/线索详情',
-                            component:detail
+                            component:detail,
                         },
                     ]
                 },
@@ -106,6 +107,7 @@ export default new Router({
                     path:'无效线索',
                     name:'invalidThread',
                     component:InvalidThread,
+                    redirect:'/thread/无效线索/作废线索',
                     children:[
                         {
                             path:'信息无效线索',
@@ -113,10 +115,18 @@ export default new Router({
                             component:InvalidInformation,
                         },
                         {
+                            path:'/thread/无效线索/信息无效线索/线索详情',
+                            component:detail,
+                        },
+                        {
                             path:'作废线索',
                             name:'InvalidClue',
                             component:InvalidClue,
-                        }
+                        },
+                        {
+                            path:'/thread/无效线索/作废线索/线索详情',
+                            component:detail,
+                        },
                     ]
                 },
                 {
@@ -125,9 +135,17 @@ export default new Router({
                     component:RepetitionThread,
                 },
                 {
+                    path:'/thread/重复线索/线索详情',
+                    component:detail,
+                },
+                {
                     path:'战败线索',
                     name:'FailThread',
                     component:FailThread,
+                },
+                {
+                    path:'/thread/战败线索/线索详情',
+                    component:detail,
                 },
             ]
         },
@@ -181,3 +199,8 @@ export default new Router({
         },
     ]
 })
+
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}

@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="vop_MoblistThread">
     <!-- 组件头部信息 -->
     <Header-info 
      @export="vopExport"
      @retrieval="retrieval"
      ExportText="加入黑名单"
-      class="vop_MoblistThread"
+      class="vop_MoblistThread_header"
       text="黑名单潜客线索"
     />
     <!-- 检索信息填写区域 -->
@@ -111,7 +111,7 @@
           移出
         </el-button>
         <el-button
-          @click.native.prevent="handleRow(scope.row.VopId, tableData)"
+          @click.native.prevent="issue(scope.$index, tableData)"
           type="text"
           size="small">
           下发
@@ -125,6 +125,98 @@
     :start="10"
     :end="20"
     />
+    <!-- 下发弹出框 -->
+    <Issue 
+    :dialogVisible="dialogVisible"
+    @setdialog-visible="setdialogVisible"
+    :vopId="vopId"
+    />
+    <!-- 添加黑名单弹出框 -->
+    <!-- 检索 -->
+    <div class="mob_list_retrieval">
+      <el-dialog
+      title="添加黑名单"
+      :visible.sync="dialogVisibleMobToast"
+      width="30%"
+      @click="dialogVisibleMobToast = false">
+      <span><i>*</i> 检索路径</span>
+      <div>
+        <ul>
+          <li>
+            <span>VOP ID</span>
+            <el-input v-model="MobVopId" placeholder="请输入用户ID"></el-input>
+          </li>
+          <li>
+            <span>手机号</span>
+            <el-input v-model="phone" placeholder="请输入用户手机号"></el-input>
+          </li>
+        </ul>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisibleMobToast = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisibleMob = true ; dialogVisibleMobToast = false">查 询</el-button>
+        <el-button @click="MobVopId = phone = ''">重 置</el-button>
+      </span>
+    </el-dialog>
+    </div>
+    <!-- 确认 -->
+    <div class="mob_list_confirm">
+      <el-dialog
+    title="添加黑名单"
+    :visible.sync="dialogVisibleMob"
+    width="30%"
+    >
+      <span>用户档案</span>
+      <div class="vop_mobil_Popup">
+        <div class="mobil_Popup_left">
+            <ul>
+              <li>
+                <span>姓名:</span>
+                <span></span>
+              </li>
+              <li>
+                <span>性别:</span>
+                <span></span>
+              </li>
+              <li>
+                <span>VOP ID:</span>
+                <span></span>
+              </li>
+              <li>
+                <span>是否车主:</span>
+                <span></span>
+              </li>
+              <li>
+                <span>联系方式:</span>
+                <span></span>
+              </li>
+              <li>
+                <span>线索条目:</span>
+                <span></span>
+              </li>
+            </ul>
+        </div>
+        <div class="mobil_Popup_right">
+            <div>头像</div>
+            <el-button type="primary">查看详情</el-button>
+        </div>
+      </div>
+      <div class="mobil_remarks">
+            <p>备注信息</p>
+            <el-input
+              type="textarea"
+              :rows="2"
+              placeholder="请输入内容"
+              v-model="mobil_textarea"
+              >
+            </el-input>
+        </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="handleClose">确 定</el-button>
+        <el-button @click="dialogVisibleMob = false">取 消</el-button>
+      </span>
+    </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -132,10 +224,23 @@
 import HeaderInfo from '@/components/headerInfo/headerInfo' 
 import CheckInfo from '@/components/checkInfo/checkInfo'
 import PagIng from '@/components/paging/paging'
+import Issue from '@/components/Issue/issue.vue'
+
 export default {
   name:"MoblistThread",
   data(){
     return{
+     vopId:'',
+    //  加入黑名单弹出框
+     dialogVisibleMobToast:false,
+     dialogVisibleMob: false,
+    //  下发弹出框
+     dialogVisible:false, 
+    //  黑名单检索信息
+    phone:'',
+    MobVopId:'',
+    // 加入黑名单备注信息
+    mobil_textarea:'',
       tableData: [
         {
           threadId: '11001',
@@ -170,21 +275,14 @@ export default {
     }
   },
   methods:{
-    vopExport(){
-      alert('加入黑民单吗!')
-    },
+    // 黑名单弹出框显示
+    vopExport(){this.dialogVisibleMobToast = true},
+    handleClose() {
+        this.$confirm('确认加入黑名单?')
+        .then(_ => this.dialogVisibleMob = false)
+      },
     retrieval(event){
       console.log('选择了高级检索' , event.target)
-    },
-    // 信息检索相关方法
-    onChange(event){
-      this[event[1]] = event[0]
-    },
-    query(e){
-      console.log(e)
-    },
-    check(e){
-      console.log(e)
     },
     // 查看 ==> 详情页面
     threadInfo(vopId){
@@ -211,26 +309,158 @@ export default {
         })
     },
     // 下发
-    handleRow(){
-
+     issue(index , rows){
+      this.dialogVisible = true
+      this.vopId = rows[index].VopId
     },
-    handleClick(row) {
-        console.log(row);
-      }
+    setdialogVisible(payload){
+      this.dialogVisible = false
+    },
+  
   },
+  // 加入黑名单
+  handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+    },
   created(){
   },
-  components:{HeaderInfo , CheckInfo ,PagIng }
+  components:{HeaderInfo , CheckInfo ,PagIng ,Issue}
 }
 </script>
 
 <style lang="scss" scoped>
-  .vop_MoblistThread{
+.vop_MoblistThread{
+  .vop_MoblistThread_header{
     margin-top:15px;
+    margin-bottom:10px;
   }
   .vop_moblist_serarchList{
     // -moz-height:360px;
     height:370px;
-    margin-top:20px;
+    margin-top:10px;
   }
+  // 加入黑名单弹出框
+  // 检索
+  .mob_list_retrieval{
+     /deep/.el-dialog{
+    width:900px !important;
+    height:240px;
+    /deep/.el-input__inner{
+      border:1px solid black;
+      height:30px;
+      width:190px
+    }
+    /deep/.el-button{
+      width:90px;
+      height:32px;
+      padding:0;
+      line-height: 32px;
+    }
+    /deep/.el-button--primary{
+      background: #169bd5;
+    }
+      /deep/.el-dialog__body{
+      margin-bottom:15px;
+      padding:10px 0 0 25px;
+      }
+      div ul {
+        display: flex;
+        justify-content: start;
+        li{
+          margin-right: 10%;
+          span{
+            margin-right:10px;
+          }
+        }
+      }
+      span{
+        margin-bottom:10px;
+        display: inline-block;
+        i{
+          color:#e66b5b;
+          margin-right:3px 
+        }
+      }
+    }
+  }
+  // 确认
+  .mob_list_confirm{
+      /deep/.el-dialog{
+    width:900px !important;
+    height:400px;
+    .vop_mobil_Popup{
+      display: flex;
+      justify-content: start;
+      .mobil_Popup_left{
+        width:60%;
+        ul{
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 10px;
+        li{
+          width:50%;
+          margin-top:10px;
+        }
+        }
+      }
+      .mobil_Popup_right{
+        width: 40%;
+        text-align: center;
+        &>div:first-child{
+          width:75px;
+          height:75px;
+          border:1px solid gray;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 75px;
+          margin-left:50%;
+          transform: translateX(-50%);
+          margin-bottom:20px
+        }
+        /deep/.el-button{
+          height:26px;
+          width:90px;
+          font-size:14px;
+          padding: 0;
+          span{
+            width:90px;
+            line-height:13px;
+            display: inline-block;
+          }
+        }
+    
+      }
+    }
+    /deep/.el-dialog__body{
+    margin-bottom:15px;
+    padding:25px 0 0 25px;
+    }
+    .mobil_remarks{
+      p{
+        margin-bottom:5px;
+      };
+      /deep/.el-textarea{
+        .el-textarea__inner{
+        resize: none;
+        border-radius: 0;
+        border:1px solid black;
+        height:80px;
+        }
+      }
+    }
+    .el-button--primary{
+      background: #169bd5;
+    }
+    .el-button{
+      width:130px;
+    }
+
+  }
+
+  }
+  }
+
 </style>

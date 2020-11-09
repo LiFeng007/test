@@ -11,7 +11,7 @@
      <!-- 主内容区 -->
     <div class="vop_serarchList vop_highrisk_serarchList">
      <el-table
-      height="420"
+      height="400"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
     >
@@ -115,17 +115,27 @@
     :start="10"
     :end="20"
     />
+    <!-- 下发弹出框 -->
+    <Issue 
+    :dialogVisible="dialogVisible"
+    @setdialog-visible="setdialogVisible"
+    :vopId="vopId"
+    />
   </div>
 </template>
 <script>
 import HeaderInfo from '@/components/headerInfo/headerInfo'
 import CheckInfo from '@/components/checkInfo/checkInfo'
 import PagIng from '@/components/paging/paging'
+import Issue from '@/components/Issue/issue.vue'
+
 export default {
   name:"HighRiskThread",
-  components:{HeaderInfo , CheckInfo , PagIng},
+  components:{HeaderInfo , CheckInfo , PagIng , Issue},
   data(){
     return{
+       vopId:'',
+       dialogVisible:false, 
        tableData: [
         {
           threadId: '11001',
@@ -174,10 +184,12 @@ export default {
         this.$router.push({name:'threadInfo', query: { id: index }})
     },
     // 下发
-    issue(index , rows){
-      this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
-          dangerouslyUseHTMLString: true
-        });
+     issue(index , rows){
+      this.dialogVisible = true
+      this.vopId = rows[index].VopId
+    },
+    setdialogVisible(payload){
+      this.dialogVisible = false
     },
     // 高级检索业务
     retrieval(event){

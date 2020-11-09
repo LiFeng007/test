@@ -2,7 +2,7 @@
   <div class="vop_effectivityThread">
     <!-- 头部信息 -->
     <Header-info 
-    v-on:export="vopExport"
+     v-on:export="handleRow"
      v-on:retrieval="retrieval"
      text="有效线索列表"
     />
@@ -11,9 +11,10 @@
     <!-- 检索列表 -->
     <div class="vop_serarchList">
      <el-table
-      height="400"
+      height="100%"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
+      @selection-change="handleSelectionChange"
     >
     <el-table-column
       fixed
@@ -103,42 +104,57 @@
           下发
         </el-button>
         <el-button
-          @click.native.prevent="handleRow(scope.row.VopId, tableData)"
+          @click.native.prevent="handleRowSingle(scope.row.VopId, tableData[scope.$index])"
           type="text"
           size="small">
           导出
         </el-button>
       </template>
     </el-table-column>
-  </el-table>
+     </el-table>
     </div>
     <!-- 分页 -->
     <Pag-ing />
-    <router-view></router-view>
+    <!-- 下发弹出框 -->
+    <Issue 
+    :dialogVisible="dialogVisible"
+    @setdialog-visible="setdialogVisible"
+    :vopId="vopId"
+    />
+    <!-- 导出弹出框 -->
+    <Export-info 
+    :dialogVisibleExport="dialogVisibleExport"
+    :multipleSelection="multipleSelection"
+    @setdialog-visible-export="setdialogVisibleExport"
+    @handle-selection-change="handleSelectionChange"
+    />
   </div>
 </template>
 <script>
-// 组件
+
+/****/ 
 import HeaderInfo from '@/components/headerInfo/headerInfo'
 import CheckInfo from '@/components/checkInfo/checkInfo'
 import SearchList from '@/components/searchList/searchList-test'
 import PagIng from '@/components/paging/paging-test'
+import Issue from '@/components/Issue/issue.vue'
+import ExportInfo from '@/components/exportInfo/exportInfo'
+
+/****/ 
 import {mapState} from 'vuex'
 export default {
   name:"effectivityThread",
   data(){
     return{
-      threadId:'',
-      VopId:'',
-      phone:'',
-      origin:'',
-      province:'',
-      city:'',
-      checkInfoList:[],
+    //下发
+     dialogVisible:false, 
+    //导出
+     dialogVisibleExport:false,
+     vopId:'',
      tableData:[{
           threadId: '11001',
           date: '2016-05-01',
-          VopId: '威马007',
+          VopId: '威马207',
           phone: '86-13734656689',
           city: '南京市',
           origin: '门店质询',
@@ -150,7 +166,7 @@ export default {
         }, {
           threadId: '11001',
           date: '2016-05-02',
-          VopId: '威马007',
+          VopId: '威马307',
           phone: '86-13734656689',
           city: '南京市',
           origin: '门店质询',
@@ -220,27 +236,45 @@ export default {
           name:'小绿',
           evaluate:'一般般~',
           empower:'是'
-        }]
+      }],
+     multipleSelection: new Array()
     }
   },
   mounted(){
   },
-  beforeupdate(){
+  beforeupdate(vopId, tableData){
+    console.log(vopId, tableData)
   },
   computed:{
     ...mapState([
       'serarchList'
     ])
-    
   },
   methods:{
-    // 导出业务 ==> 批导
-    vopExport(){
-      alert('确定导出吗')
+    // 批量导出
+    handleRow(){
+      if(this.multipleSelection.length === 0){
+          this.$message({
+          message: '请选择要导出的线索',
+          type: 'warning',
+          duration:2000
+        })
+        return
+      }
+      this.dialogVisibleExport = true
     },
-    // 导出业务 ==> 单个
-    handleRow(index, rows){
-        console.log( '单个导出',index, rows[index])
+    // 单个导出 
+    handleRowSingle(vopId , row){
+      this.dialogVisibleExport = true
+      this.multipleSelection.push(row)
+    },
+    // 子组件中关闭模态框的方法
+    setdialogVisibleExport(payload){
+      this.dialogVisibleExport = payload
+    },
+    // 选中项 push到multipleSelection容器中
+    handleSelectionChange(val) {
+        this.multipleSelection = val;
     },
     // 详情页
     threadInfo(index , rows){
@@ -249,24 +283,22 @@ export default {
     },
     // 下发
     issue(index , rows){
-      this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
-          dangerouslyUseHTMLString: true
-        });
+      this.dialogVisible = true
+      this.vopId = rows[index].VopId
+    },
+    setdialogVisible(payload){
+      this.dialogVisible = false
     },
     // 高级检索业务
     retrieval(event){
       console.log('选择了高级检索' , event.target)
     },
-    // 信息输入完成检索业务
-    query(e){
-      console.log(e[0] , e[1])
-    },
      deleteRow(index, rows) {
         // rows.splice(index, 1);
         console.log(index, rows)
-      }
+     }
   },
-  components:{HeaderInfo , CheckInfo  , PagIng}
+  components:{HeaderInfo , CheckInfo  , PagIng , Issue , ExportInfo}
 }
 </script>
 

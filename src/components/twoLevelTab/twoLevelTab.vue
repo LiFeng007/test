@@ -22,7 +22,10 @@ export default {
       type:Array,
       required:true,
     }
-  }
+  },
+  created(){
+     this.$router.push({path:decodeURI(this.$route.path)})
+  },
 }
 </script>
 

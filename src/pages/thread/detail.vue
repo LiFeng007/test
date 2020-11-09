@@ -8,7 +8,7 @@
   :key="index"
   >
   <span
-   @click="index !== breadcrumb.length-1 ? historyGo() : ''"
+   @click="index !== breadcrumb.length-1 ? historyGo(index + 1) : ''"
   >{{item}}</span>
   </el-breadcrumb-item>
 </el-breadcrumb>
@@ -341,6 +341,7 @@ export default {
       breadcrumb:[],
       activeNames: ['1'],
       dialogVisible: false,
+      url:'',
       // 基本信息
       basicInfo:{
         clueId:'10017',
@@ -423,10 +424,18 @@ export default {
     }
   },
   methods:{
-    historyGo(){
-      this.$router.go(-1)
+    // 头部面包屑跳转方法
+    historyGo(index){
+      // 取出path信息 根据点击面包屑的index做出相应跳转
+      this.url = decodeURI(this.$route.path).split('/')
+      this.url = this.url.splice(1 , index+1)
+      let str = ''
+      this.url.forEach(item => str += '/' + item)
+      this.$router.push(str)
     },
+    // 返回列表页方法 
     backList(){
+      // 取出path信息 去掉path中详情地址,跳回列表页
       this.$router.push({path:decodeURI(this.$route.path).slice(0,decodeURI(this.$route.path).length-5)})
     },
     handleChange(val) {

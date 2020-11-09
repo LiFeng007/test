@@ -58,8 +58,9 @@
             </el-option>
         </el-select>
         </div>
-     <!-- 重置&&查询 -->
-  <div class="vop_checkInfo_query">
+    </div>
+      <!-- 重置&&查询 -->
+      <div class="vop_checkInfo_query">
       <el-button
       class="vop_checkInfo_button"
         size="small"
@@ -74,7 +75,6 @@
         @click="reset"
       >重置</el-button>
      </div>
-    </div>
 
     </div>
 </template>
@@ -150,21 +150,21 @@ export default {
 </script>
 
 <style lang="scss">
+.vop_checkInfo{
+  display: flex;
+  background: white;
+  border:1px solid #d7d7d7;
+}
+.vop_checkInfo_query{
+  padding:0 0 29px 29px;
+  margin:56px 20px 0 0;
+
+}
 .vop_checkInfo_main{
   display: flex;
   flex-wrap: wrap;
-  background: white;
   padding:0 0 29px 29px;
   margin-top:22px;
-  border:1px solid #d7d7d7;
-  position:relative;
-  // 查询&&重置
-  .vop_checkInfo_query{
-    position:absolute;
-    top: 20%;
-    left: 88%;
-    
-  }
 }
 .vop_checkInfo_item{
   width:320px;

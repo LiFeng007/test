@@ -148,7 +148,7 @@ export default {
         display: block;
      }
      ul{
-       z-index:2;
+       z-index:999;
        &:hover{
          display: block;
        };

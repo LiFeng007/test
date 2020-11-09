@@ -53,6 +53,7 @@ export default {
     text-decoration: none;
     }
     .vop_header_info{
+      margin:10px 0;
       display: flex;
       justify-content: space-between;
     }

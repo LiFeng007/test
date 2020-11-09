@@ -144,7 +144,7 @@ export default {
 </script>
 <style lang="scss">
   .vop_serarchList{
-    width:1220px;
+    // width:1220px;
     margin-top:15px;
     background:white;
     // height:420px;

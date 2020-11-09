@@ -38,13 +38,13 @@ export default {
         },
         {
           id:5,
-          to:'战败线索',
-          name:'FailThread',
+          to:'重复线索',
+          name:'RepetitionThread',
         },
         {
           id:6,
-          to:'重复线索',
-          name:'RepetitionThread',
+          to:'战败线索',
+          name:'FailThread',
         },
         ],
     }
@@ -52,7 +52,7 @@ export default {
   name:"thread",
   components:{
     LeftList
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
