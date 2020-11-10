@@ -3,11 +3,13 @@
     <LeftList 
     :list="data"
     />
-    <router-view />
+    <div class="vop_rule_right">
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
-import LeftList from '../../components/leftList/leftList'
+import LeftList from '@/components/leftList/leftList'
 export default {
   name:"rule",
   components:{LeftList},
@@ -16,14 +18,14 @@ export default {
       // 左侧导航数据信息
       data:[
          {
-                    id:1,
-                    to:'业务条件规则配置',
-                    name:'operationRulr',
+                id:1,
+                to:'业务条件规则配置',
+                name:'operationRulr',
                 },
                 {
-                    id:2,
-                    to:'经销商配置',
-                    name:'dealerRule',
+                  id:2,
+                  to:'经销商配置',
+                  name:'dealerRule',
                 },
                 {
                     id:3,
@@ -37,7 +39,7 @@ export default {
                 },
                 {
                     id:5,
-                    to:'城市轮询表',
+                    to:'城市轮巡表',
                     name:'cityPoll',
                 },
       ],
@@ -46,8 +48,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
- .vop_rule{
+
+  .vop_rule{
     display: flex;
     height:calc(100% - 40px);
+    overflow: hidden;
+    .vop_rule_right{
+      padding:20px 56px 0 27px;
+      flex:1;
+      overflow-y: auto;
+    }
   }
 </style>

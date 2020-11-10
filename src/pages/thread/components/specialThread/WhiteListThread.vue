@@ -12,7 +12,7 @@
     <!-- 主内容区 -->
     <div class="vop_serarchList">
      <el-table
-      height="360"
+      height="370"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
     >

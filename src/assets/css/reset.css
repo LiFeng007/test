@@ -84,3 +84,6 @@ a{text-decoration:none;}
 .el-collapse-item__wrap{
     background:#f0f2f5 ;
 }
+.gutter{
+    display: none !important;
+}

@@ -147,7 +147,7 @@ export default {
     // width:1220px;
     margin-top:15px;
     background:white;
-    // height:420px;
+    // height:40%;
   }
 
   // 修改一些element样式
@@ -157,24 +157,23 @@ export default {
     text-align: center;
   }
   .el-table th, .el-table tr{
-    width:240px;
+    // width:240px;
   }
-  // .el-table tr{
-  //   color:#02aff4;
-  // }
-  // .el-table .cell{
-  //   font-size:17px;
-  //   color:#7f7f7f;
-  //   text-align: center;
+  .el-table tr{
+    color:#02aff4;
+  }
+  .el-table .cell{
+    // font-size:17px;
+    color:#7f7f7f;
+    text-align: center;
 
-  // }
-  .el-table td, .el-table th{
-    text-align: none;
   }
+  // .el-table td, .el-table th{
+  //   text-align: none;
+  // }
   .el-table th {
     background:#f2f2f2;
     border:#d7d7d7 1px solid;
-    
     text-align: center;
     &:nth-child(2n){
       border-left:none;
@@ -184,7 +183,6 @@ export default {
     &:nth-child(n){
       border-bottom: 1px solid #d7d7d7;
     }
-    
   }
   .el-table__body td{
     border:1px solid #d7d7d7;

@@ -24,6 +24,8 @@ import dealerRule from '../pages/rule/components/dealerRule.vue'
 import operationRulr from '../pages/rule/components/operationRulr.vue'
 import risk from '../pages/rule/components/risk.vue'
 import threadRecycle from '../pages/rule/components/threadRecycle.vue'
+// 新增规则
+import addRule from '@/pages/rule/components/addRule.vue'
 
 /*****线索流转监控****/ 
 import  threadMonitoring from '../pages/threadMonitoring/components/threadMonitoring.vue'
@@ -170,6 +172,14 @@ export default new Router({
                     path:'业务条件规则配置',
                     name:'operationRulr',
                     component:operationRulr,
+                },
+                {
+                    path:'/rule/业务条件规则配置/线索详情',
+                    component:detail,
+                },
+                {
+                    path:'/rule/业务条件规则配置/业务条件规则配置详情',
+                    component:addRule,
                 },
                 {
                     path:'经销商配置',

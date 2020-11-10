@@ -440,7 +440,7 @@ export default {
     },
     handleChange(val) {
         // console.log(val);
-      },
+    },
     //修改经销商归属地信息 
     handleClose() {
         this.$confirm('是否确认修改归属经销商?')
@@ -482,7 +482,7 @@ export default {
     .vop_thread_detail_main{
       margin-top:10px;
       flex: 1;
-      overflow: auto;
+      // overflow: auto;
     }
     .thread_detail_but{
       margin:20px 0 30px 50%;

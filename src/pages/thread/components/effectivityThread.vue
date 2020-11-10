@@ -11,7 +11,7 @@
     <!-- 检索列表 -->
     <div class="vop_serarchList">
      <el-table
-      height="100%"
+      height="400px"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
       @selection-change="handleSelectionChange"
@@ -114,7 +114,11 @@
      </el-table>
     </div>
     <!-- 分页 -->
-    <Pag-ing />
+    <Pag-ing 
+    :count='40'
+    :start='1'
+    :end='10'
+    />
     <!-- 下发弹出框 -->
     <Issue 
     :dialogVisible="dialogVisible"
@@ -135,8 +139,8 @@
 /****/ 
 import HeaderInfo from '@/components/headerInfo/headerInfo'
 import CheckInfo from '@/components/checkInfo/checkInfo'
-import SearchList from '@/components/searchList/searchList-test'
-import PagIng from '@/components/paging/paging-test'
+import SearchList from '@/components/searchList/searchList'
+import PagIng from '@/components/paging/paging'
 import Issue from '@/components/Issue/issue.vue'
 import ExportInfo from '@/components/exportInfo/exportInfo'
 

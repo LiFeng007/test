@@ -56,7 +56,6 @@ export default {
           .then(_ => {
             this.Close()
           })
-          .catch(_ => {});
       },
       // 关闭模态框 ==> 清空 选中线索容器中的内容 
       Close(){
@@ -67,6 +66,14 @@ export default {
       delItem(index){
           this.multipleSelection.splice(index , 1)
           this.$message('已取消导出');
+      }
+    },
+    watch:{
+      multipleSelection:{
+        handler(newVal , oldVal){
+          newVal.length === 0 && this.$emit('setdialog-visible-export' , false)
+        },
+        deep:true
       }
     }
 }
