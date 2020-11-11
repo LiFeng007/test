@@ -60,16 +60,20 @@
       <template slot-scope="scope">
          <el-button
           type="text"
-          size="small">
+          size="small"
+          @click.native.prevent="threadInfo(scope.row.ruleName, '/业务条件规则配置详情' , tableData )"
+          >
           调整
         </el-button>
          <el-button
           type="text"
-          size="small">
+          size="small"
+          @click.native.prevent="threadInfo(scope.row.ruleName, '/业务条件规则配置详情' , tableData )"
+          >
           修改
         </el-button>
         <el-button
-          @click.native.prevent="threadInfo(scope.row.VopId, '/线索详情' , tableData )"
+          @click.native.prevent="threadInfo(scope.row, '/线索详情' , tableData )"
           type="text"
           size="small">
           查看
@@ -182,8 +186,7 @@ export default {
         })
     },
     // 查看 修改 新增 页面
-    threadInfo(vopId , path){
-      // console.log(this.$route.path)
+    threadInfo(vopId , path , data){
         this.$router.push({path:this.$route.path + path , query: { id: vopId }})
     },
   },

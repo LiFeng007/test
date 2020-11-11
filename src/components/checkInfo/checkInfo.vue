@@ -106,7 +106,6 @@ export default {
     methods:{
       // 请求数据
       async getList(){
-        console.log('求库')
        let res = await this.$http.post('http://47.116.74.91:3003/users/login', {
                 username: this.username,
                 password: this.password

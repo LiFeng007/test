@@ -13,7 +13,8 @@ Vue.prototype.$http = axios
 import store from '@/plugins/vuex'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-
+import echarts from "echarts"
+Vue.prototype.$echarts = echarts 
 
 let vm = new Vue({
 	data:{

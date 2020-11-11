@@ -24,6 +24,7 @@
           type="textarea"
           :rows="2"
           placeholder="请输入规则描述,描述内容不超过300字"
+          maxlength="300"
           v-model="ruleDescribe">
         </el-input>
         </div>
@@ -69,7 +70,7 @@
                   </li>
                   <li>
                     <span>来源渠道名称</span>
-                    <el-input placeholder="请输入来源渠道名称" v-model="activityName"></el-input>
+                    <el-input placeholder="请输入来源渠道名称" v-model="source"></el-input>
                   </li>
                   <li>
                     <span>媒体产品名称</span>
@@ -91,18 +92,20 @@
                   <li>上报时间</li>
                   <li>
                     <p>
-                      <el-radio v-model="followTime" label="1">不限</el-radio>
+                      <el-radio v-model="followTime" label="不限">不限</el-radio>
                     </p>
                     <p class="vop_time_slot">
-                      <el-radio v-model="followTime" label="2">时间周期</el-radio>
+                      <el-radio v-model="followTime" label="时间周期">时间周期</el-radio>
                       <el-time-picker
+                          :disabled="followTime === '时间周期' ? false : true"
                           v-model="startDate"
                           :picker-options="{
-                            selectableRange: '0:0:00 - 23:59:59'
+                          selectableRange: '0:0:00 - 23:59:59'
                           }"
                           placeholder="选择开始时间点">
                         </el-time-picker>
                         <el-time-picker
+                          :disabled="startDate ? false : true"
                           arrow-control
                           v-model="endDate"
                           :picker-options="{
@@ -117,17 +120,17 @@
                   <div>
                     <span>是否勾选同意威马用户注册协议</span>
                     <nav>
-                      <el-radio v-model="agreement" label="a">不限</el-radio>
-                      <el-radio v-model="agreement" label="b">是</el-radio>
-                      <el-radio v-model="agreement" label="c">否</el-radio>
+                      <el-radio v-model="agreement" label="不限">不限</el-radio>
+                      <el-radio v-model="agreement" label="是">是</el-radio>
+                      <el-radio v-model="agreement" label="否">否</el-radio>
                     </nav>
                   </div>
                   <div>
                     <span>门店意向是否为空</span>
                     <nav>
-                      <el-radio v-model="isStore" label="e">不限</el-radio>
-                      <el-radio v-model="isStore" label="f">是</el-radio>
-                      <el-radio v-model="isStore" label="g">否</el-radio>
+                      <el-radio v-model="isStore" label="不限">不限</el-radio>
+                      <el-radio v-model="isStore" label="是">是</el-radio>
+                      <el-radio v-model="isStore" label="否">否</el-radio>
                     </nav>
                   </div>
                 </article>
@@ -146,11 +149,15 @@
             <div class="rule_custom">
               <div>
                 <p>线索提取规则配置</p>
-                <b>规则1</b>
-              <div>
+                
+              <div
+              v-for="item in ruleCount"
+              :key="item"
+              >
+                <b>规则{{item}}</b>
                 <span>属性</span>
                 <!-- ************** -->
-                <el-select 
+              <el-select 
                   v-model="selectBrand" 
                   placeholder="请选择"
                   clearable
@@ -205,12 +212,9 @@
 
               </div>
               <!-- ********** -->
-              <nav><span>+增加规则属性</span></nav>
-              <!-- ********** -->
-              <div>
-                <el-button type="primary">+ 增加规则</el-button>
-                <span>(不同规则间关系为 "或" )</span>
-              </div>
+              <nav
+              @click="ruleCount ++"
+              ><span>+增加规则属性</span></nav>
               <!-- ***** -->
               <aside>
                 <i>*</i>
@@ -223,26 +227,115 @@
     </el-tabs>
     </div>
     <!-- ******* -->
+
     <div v-show="isIssus">
     <!-- 下发配置 -->
     <div class="vop_issue_config">
      <header><span><i>*</i>下发配置</span></header>
      <ul>
-       <li><span><i>*</i>下发平台</span></li>
-       <li><span><i>*</i>下发周期配置</span></li>
-       <li><span><i>*</i>重复线索下发</span></li>
-     </ul>
-     <ul>
-       <li></li>
-       <li></li>
-       <li></li>
+       <li>
+         <span><i>*</i>下发平台</span>
+         <div>
+           <template>
+            <el-radio v-model="issuePlatform" label="CDC">CDC</el-radio>
+            <el-radio v-model="issuePlatform" label="SOP">SOP</el-radio>
+          </template>
+         </div>
+        </li>
+       <li>
+         <span><i>*</i>下发周期配置</span>
+         <div>
+           <p>
+              <el-radio v-model="issueMode" label="实时下发">实时下发</el-radio>
+           </p>
+           <nav>
+             <div>
+              <el-radio v-model="issueMode" label="时间间隔下发">时间间隔下发</el-radio>
+              <el-input
+              placeholder="请输入间隔时间"
+              v-model="distributionConfigTimePeriod"
+              :disabled = "issueMode === '时间间隔下发' ? false : true"
+              ></el-input>
+             </div>
+             <div>
+              <el-radio v-model="issueMode" label="固定时间下发">固定时间下发</el-radio>
+              <el-time-picker
+                :disabled = "issueMode === '固定时间下发' ? false : true"
+                :picker-options="{
+                selectableRange: '0:0:00 - 23:59:59'
+                }"
+                v-model="distributionConfigTime"
+                placeholder="选择开始时间点">
+              </el-time-picker>
+             </div>
+           </nav>
+         </div>
+        </li>
+       <li>
+         <span><i>*</i>重复线索下发限制</span>
+         <div>
+           <el-radio  label="不限" v-model="repeatClueLimit">不限</el-radio>
+           <el-radio  label="重复间隔时间" v-model="repeatClueLimit">重复间隔时间</el-radio>
+           <el-input 
+           placeholder="请输入间隔时间" 
+           v-model="repeatClueLimit"
+           :disabled = "repeatClueLimit === '重复间隔时间' ? false : true"
+           ></el-input>
+         </div>
+        </li>
      </ul>
     </div>
     <!-- 经销商分配规则配置 -->
     <div class="vop_distribution_config">
-      经销商分配规则配置
+     <header><span><i>*</i>经销商分配规则配置</span></header>
+     <div>
+       <!-- ********* -->
+       <ul>
+         <li>
+            <el-radio v-model="weight" label="区域内平均分配">区域内平均分配</el-radio>
+            <span>(按照A-B-C-A的顺序循环依次进行分配)</span>
+         </li>
+         <li>
+            <el-radio v-model="weight" label="区域内补充分配">区域内补充分配</el-radio>
+            <span>(优先分配给区域内线索保留量最少的经销商)</span>
+         </li>
+         <li>
+            <el-radio v-model="weight" label="区域内权重分配">区域内权重分配</el-radio>
+            <span>(对同一区域内不同经销商设置不同的分配权重，权重越高 分到的线索越多。)</span>
+         </li>
+       </ul>
+       <!-- ********* -->
+       <ul>
+          <li>
+            <span><i>*</i>生效时间</span>
+          </li>
+          <li>
+            <el-radio v-model="takeEffectTime" label="永久有效">永久有效</el-radio>
+            <div>
+              <el-radio v-model="takeEffectTime" label="有效期">有效期</el-radio>
+              <el-date-picker
+                :disabled = "takeEffectTime === '有效期' ? false : true"
+                v-model="temr"
+                type="datetimerange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期">
+              </el-date-picker>
+            </div>
+
+          </li>
+       </ul>
+     </div>
     </div>
     </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <div>
+        <el-button type="primary">保存并发布</el-button>
+        <el-button @click="Object.assign($data, $options.data())">取消</el-button>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -284,6 +377,26 @@ export default {
       selectInfo:'',
       // 是否下发
       isIssus:true,
+      //下发平台
+      issuePlatform:'',
+      // 下发方式
+      issueMode:'',
+      // 权重配置
+      weight:'',
+      // 生效时间
+      takeEffectTime:'',
+      // 有效期
+      temr:'',
+      // 下发配置时间段
+      distributionConfigTimePeriod:'',
+      // 固定时间下发
+      distributionConfigTime:'',
+      // 重复线索下发限制
+      repeatClueLimit:'',
+      // 重复间隔时间段
+      repeatClueLimitTimePeriod:'',
+      // 自定义规则条数
+      ruleCount:1,
       // 线索提取规则
       ruleData:[
         {value:'品牌' , label:'品牌'},
@@ -300,6 +413,12 @@ export default {
     this.breadcrumb = decodeURI(this.$route.path.split('/').splice(2))
     this.breadcrumb = this.breadcrumb.split(',')
   },
+  watch:{
+    startDate(newVal , oldVal){
+       if(!newVal) this.endDate = ''
+    }
+  },
+
   methods:{
     // 头部面包屑跳转方法
     historyGo(index){
@@ -310,14 +429,12 @@ export default {
       this.url.forEach(item => str += '/' + item)
       this.$router.push(str)
     },
-    test(){
-      console.log('单击了')
-    }
   }
 }
 </script>
 <style lang="scss" scoped>
 .vop_rule_addrule{
+  font-size:14px;
   // 规则名称 规则描述
   .input_rule {
     margin-top:20px;  
@@ -457,18 +574,76 @@ export default {
   }
   aside{
     padding:0 0 30px 5px;
-    span{margin:0 5% 0 5px}
+    span{margin:0 10% 0 5px}
   }
-  i{color:#e66b5b;}
-  // 下发配置
-  .vop_issue_config{
-    header{
+  i{color:#e66b5b;margin-right:3px}
+  header{
       height:40px;
       background:#b9ced8;
       line-height: 40px;
       padding-left:5px;
     }
+  // 下发配置
+  .vop_issue_config{
+    ul > li{
+      display:flex;
+      margin:15px 0;
+      span{
+        display:inline-block;
+        width: 200px;
+        margin-left:5px;
+      }
+      nav{
+        display: flex;
+        margin:10px 0;
+        &>div{
+          margin-right:100px;
+        }
+      }
+      &:last-child{
+        display: flex;
+        align-items: center;
+      }
+    }
   }
   // 经销商分配配置
+  /deep/.el-date-range-picker__time-header{
+    display:none;
+  }
+  .vop_distribution_config{
+    &>div{
+      padding-left:20px;
+    }
+    li{
+      margin:10px 0;
+    }
+    ul{
+      margin:20px 0 60px 0;
+    }
+    ul:last-child{
+      display:flex;
+      span{
+        margin-right:80px;
+        display:inline-block;
+      }
+      li div{
+        margin-top:15px;
+      }
+    }
+  }
+  // 页脚
+  footer{
+    margin-bottom:50px;
+    &>div{
+    margin-left:50%;
+    transform: translateX(-50%);
+    text-align: center;
+    /deep/.el-button{
+      width:150px;
+    }
+    }
+
+  }
+
 }
 </style>

@@ -89,7 +89,7 @@
     <el-table-column
       fixed="right"
       label="操作"
-      width="120">
+      width="160">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="threadInfo(scope.row.VopId, tableData)"

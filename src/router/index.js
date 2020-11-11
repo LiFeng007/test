@@ -24,6 +24,9 @@ import dealerRule from '../pages/rule/components/dealerRule.vue'
 import operationRulr from '../pages/rule/components/operationRulr.vue'
 import risk from '../pages/rule/components/risk.vue'
 import threadRecycle from '../pages/rule/components/threadRecycle.vue'
+// 经销商配置子路由
+import dealerList from '@/pages/rule/components/dealerRule/dealerList'
+import weightConfig from '@/pages/rule/components/dealerRule/weightConfig'
 // 新增规则
 import addRule from '@/pages/rule/components/addRule.vue'
 
@@ -185,6 +188,19 @@ export default new Router({
                     path:'经销商配置',
                     name:'dealerRule',
                     component:dealerRule,
+                    redirect:'/rule/经销商配置/经销商列表',
+                    children:[
+                        {
+                            path:'经销商列表',
+                            name:'dealerList',
+                            component:dealerList,
+                        },
+                        {
+                            path:'权重配置',
+                            name:'weightConfig',
+                            component:weightConfig,
+                        },
+                    ]
                 },
                 {
                     path:'线索回收规则配置',
@@ -195,6 +211,14 @@ export default new Router({
                     path:'风险配置',
                     name:'risk',
                     component:risk,
+                },
+                {
+                    path:'/rule/风险配置/风险配置详情',
+                    component:addRule,
+                },
+                {
+                    path:'/rule/风险配置/线索详情',
+                    component:detail,
                 },
                 {
                     path:'城市轮询表',
