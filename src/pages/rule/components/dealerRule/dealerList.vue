@@ -42,53 +42,38 @@
     <!-- 省份 -->
      <div class="vop_checkInfo_item">
        <span class="vop_checkInfo_items">意向省份</span>
-       <el-select 
-            v-on:change="getProv($event)"
-            v-model="selectProv" 
-            filterable 
-            placeholder="请选择"
-            clearable
-            >
-            <el-option
-            :key="index"
-             v-for="(item1 , index) in provs"
-            :label="item1.label"
-            :value="item1.value">  
-            </el-option>
-        </el-select>
+       <el-select v-model="provinceValue" placeholder="请选择" @change="chooseProvince" clearable filterable>
+          <el-option	
+              v-for="item in provinceData"
+              :key="item.code"
+              :label="item.name"
+              :value="item.name">
+          </el-option>
+	      </el-select>
      </div>
      <!-- 城市 -->
       <div class="vop_checkInfo_item">
           <span class="vop_checkInfo_items">意向城市</span>
-          <el-select 
-           v-on:change="getCity($event)"
-           v-model="selectCity" 
-           filterable 
-           placeholder="请选择"
-           clearable
-           >
-            <el-option
-              v-for="(item , index) in citys"
-              :key="index"
-              :label="item.label"
-              :value="item.value">
+          <el-select v-model="cityValue" placeholder="请选择" @change="chooseCity" clearable filterable>
+            <el-option	
+                v-for="item in cityData"
+                :key="item.code"
+                :label="item.name"
+                :value="item.name">
             </el-option>
-        </el-select>
+	        </el-select>
       </div>
        <!-- 区域 -->
       <div class="vop_checkInfo_item">
         <span class="vop_checkInfo_items">区域</span>
-        <el-select 
-            v-model="selectArea" 
-            filterable 
-            placeholder="请选择"
-            clearable
-            >
-            <el-option
-            label="请选择"
-            value="请选择">  
-            </el-option>
-      </el-select>
+        <el-select v-model="areaValue" @change="chooseArea" placeholder="请选择" clearable filterable>
+          <el-option
+              v-for="item in areaData"
+              :key="item.code"
+              :label="item.name"
+              :value="item.name">
+          </el-option>
+       </el-select>
       </div>
     </div>
       <!-- 重置&&查询 -->
@@ -218,7 +203,7 @@
 
 <script>
 // 省市联动数据
-import data from '@/static/city.json'
+import data from '@/static/city2.json'
 import PagIng from '@/components/paging/paging.vue'
 export default {
   name:'dealerList',
@@ -226,16 +211,17 @@ export default {
   data(){
     return{
         // 省市联动
-        provs:data.provs,
-        citys: [],
+        provinceValue:'',
+				cityValue:'',
+				areaValue:'',
+				provinceData:[],
+				cityData:[],
+				areaData:[],
         // 输入信息元数据
         threadId:'',
         dealerType:'',
         // 下发录出
         Recorded:'',
-        selectProv: '',
-        selectCity: '',
-        selectArea: '',
         // 
         dialogVisible:false,
         dialogVisible1:false,
@@ -311,8 +297,8 @@ export default {
       },
       // 重置
       reset(){
-        if(this.VopId !== "" || this.threadId !== "" || this.phone !== "" || this.origin !== "" || this.selectProv !== "" || this.selectCity !== ""){
-        this.VopId = this.threadId = this.phone = this.origin = this.selectProv = this.selectCity = ""
+        if(this.threadId !== "" || this.dealerType !== ""  || this.Recorded !== "" || this.provinceValue !== "" || this.cityValue !== "" !== this.areaValue !==  ""){
+        this.threadId = this.dealerType = this.Recorded = this.provinceValue = this.cityValue =  this.areaValue = ""
         this.$message('重置成功');
         }
       },
@@ -339,30 +325,33 @@ export default {
         this.dialogVisible1 = false
       },
     // 省市联动
-      getProv: function (prov) {
-        let tempCity=[];
-        this.citys=[];
-        this.selectCity='';
-        let allCity=data.allCity;
-        for (var val of allCity){
-          if (prov == val.prov){
-            tempCity.push({label: val.label, value: val.label})
-          }
-        }
-        this.citys = tempCity;
-        },
-        getCity: function (city) {
-          // console.log('getCity:' + city);
-          let allArea = data.allArea
-          this.selectArea='';
-          this.area = allArea.filter( item => item.city === city)
-          // console.log(this.selectCity)
-        },
-        getArea: function (area) {
-          // console.log('area');
-          // console.log(this.selectArea)
-        },
-  }
+     chooseProvince(value){
+				this.cityValue = '';
+				this.areaValue = '';
+				this.cityData = [];
+				this.areaData = [];
+				this.provinceData.map(e=>{//遍历数据
+					if( value == e.name){
+						this.cityData = e.cityList;
+						return;
+					}
+				})
+			},
+			chooseCity(value){
+				this.areaValue = '';
+				this.cityData.map(e=>{//遍历数据
+					if( value == e.name){
+						this.areaData = e.areaList;
+						return;
+					}
+				})
+			},
+			chooseArea(){
+			}
+  },
+  created(){
+    this.provinceData = data
+  },
 }
 </script>
 
