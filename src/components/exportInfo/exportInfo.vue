@@ -12,7 +12,7 @@
       v-for="(item , index) of multipleSelection"
       :key="index"
       >
-      {{item.VopId}}
+      {{item.VopId || item.storeName || item.classify}}
       <i 
       class="el-icon-close"
       @click="delItem(index)"
@@ -34,6 +34,7 @@ export default {
   name:'exportInfo',
   data(){
     return{
+      list:[]
     }
   },
   props:{
@@ -46,7 +47,8 @@ export default {
       required:true,
     }
   },
-  updated(){
+  created(){
+    Object.assign( [], this.list , this.multipleSelection)
   },
    methods: {
     //  点击确定下发执行的业务

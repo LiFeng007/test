@@ -227,13 +227,14 @@ export default {
         dialogVisible1:false,
         // 
         setWeights:{data:'',index:''},
-         tableData:[{
+        tableData:[{
           vopId:20201111,
           ruleName: '风险配置' ,
           person:'钢铁侠',
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
         }, {
           vopId:20201111,
@@ -242,6 +243,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
         }, {
          vopId:20201111,
@@ -250,6 +252,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
         }, {
           vopId:20201111,
@@ -258,6 +261,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
         }, {
           vopId:20201111,
@@ -266,6 +270,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
 
         }, {
@@ -275,6 +280,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
         }, {
           vopId:20201111,
@@ -283,6 +289,7 @@ export default {
           distributorType: '一级经销商',
           weight:'20%',
           setWeight:'',
+          close:false,
           address:'上海市-青浦区-威马****',
       }]
     }
@@ -297,16 +304,16 @@ export default {
       },
       // 重置
       reset(){
-        if(this.threadId !== "" || this.dealerType !== ""  || this.Recorded !== "" || this.provinceValue !== "" || this.cityValue !== "" !== this.areaValue !==  ""){
+        if(this.threadId !== "" || this.dealerType !== ""  || this.Recorded !== "" || this.provinceValue !== "" || this.cityValue !== "" || this.areaValue !==  ""){
         this.threadId = this.dealerType = this.Recorded = this.provinceValue = this.cityValue =  this.areaValue = ""
-        this.$message('重置成功');
+        this.$message('重置成功')
         }
       },
     // 修改权重
       setWeight(){
-        this.tableData[this.setWeights.index].weight = this.setWeights.data
-        if (parseInt(this.setWeights.data) <= 100 && /^\d+%$/.test(this.setWeights.data)){
+        if (parseInt(this.setWeights.data) <= 100 && /^(100|[1-9]?\d(\.\d\d?\d?)?)%$|0$/.test(this.setWeights.data)){
         this.dialogVisible = false
+        this.tableData[this.setWeights.index].weight = this.setWeights.data
         this.$message({message: '修改成功',type: 'success'});
         }else{
           this.$message({message: '请规范输入内容',type: 'error'})

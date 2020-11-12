@@ -606,10 +606,6 @@ export default {
       }
     }
   }
-  // 经销商分配配置
-  /deep/.el-date-range-picker__time-header{
-    display:none;
-  }
   .vop_distribution_config{
     &>div{
       padding-left:20px;

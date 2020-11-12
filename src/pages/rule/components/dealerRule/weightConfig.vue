@@ -67,7 +67,6 @@ export default {
         selectProv: '',
         selectCity: '',
         option : {
-
           series: [
               {
                   name: '访问来源',

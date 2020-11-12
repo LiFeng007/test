@@ -15,7 +15,7 @@
       size="small"
       @click="$emit('retrieval' , $event)"
       style="border:1px solid gray"
-      >高级检索</el-button>
+      >{{retrievalText}}</el-button>
      </div>
   </div>
 </template>
@@ -38,6 +38,10 @@ export default {
     ExportText:{
       type:String,
       default:'导出',
+    },
+    retrievalText:{
+      type:String,
+      default:'高级检索',
     }
   }
 }

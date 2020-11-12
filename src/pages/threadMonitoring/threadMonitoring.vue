@@ -3,7 +3,10 @@
    <LeftList
    :list="data"
     />
-   <router-view />
+    <div class="vop_threadMonitoring_right">
+      <router-view />
+    </div>
+  
   </div>
 </template>
 <script>
@@ -26,5 +29,10 @@ export default {
   .vop_threadMonitoring{
     display: flex;
     height:calc(100% - 40px);
+    .vop_threadMonitoring_right{
+      padding:20px 56px 0 27px;
+      flex:1;
+      overflow-y: auto;
+    }
   }
 </style>

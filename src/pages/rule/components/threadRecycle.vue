@@ -33,7 +33,7 @@
   <footer>
       <div>
         <el-button type="primary">保存并发布</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="Object.assign($data, $options.data())">取消</el-button>
       </div>
   </footer>
 
@@ -53,9 +53,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vop_rule_recycle{
-   /deep/.el-date-range-picker__time-header{
-    display:none;
-  }
   p{margin:30px 0 ; span{margin-right:30px}}
   i{color:#e66b5b;margin-right:3px}
   ul{

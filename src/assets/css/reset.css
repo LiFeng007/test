@@ -87,3 +87,7 @@ a{text-decoration:none;}
 .gutter{
     display: none !important;
 }
+.el-date-range-picker__time-header{
+  display:none !important;
+  color:red
+}

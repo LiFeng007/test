@@ -154,6 +154,7 @@ export default {
      dialogVisible:false, 
     //导出
      dialogVisibleExport:false,
+     multipleSelection: new Array(),
      vopId:'',
      tableData:[{
           threadId: '11001',
@@ -241,13 +242,11 @@ export default {
           evaluate:'一般般~',
           empower:'是'
       }],
-     multipleSelection: new Array()
     }
   },
   mounted(){
   },
   beforeupdate(vopId, tableData){
-    console.log(vopId, tableData)
   },
   computed:{
     ...mapState([

@@ -61,7 +61,6 @@
          <el-button
           type="text"
           size="small"
-          @click.native.prevent="threadInfo(scope.row.ruleName, '/业务条件规则配置详情' , tableData )"
           >
           调整
         </el-button>
