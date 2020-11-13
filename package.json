@@ -12,7 +12,8 @@
     "echarts": "^4.9.0",
     "element-ui": "^2.14.0",
     "node-sass": "^4.14.1",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",

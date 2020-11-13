@@ -62,12 +62,12 @@ export default {
       // 关闭模态框 ==> 清空 选中线索容器中的内容 
       Close(){
           this.$emit('setdialog-visible-export' , false)
-          this.$emit('handle-selection-change' , new Array())
+          this.multipleSelection.length === 1 && this.$emit('handle-selection-change' , new Array())
       },
       // 删除一项
       delItem(index){
           this.multipleSelection.splice(index , 1)
-          this.$message('已取消导出');
+          this.$message('已取消导出')
       }
     },
     watch:{

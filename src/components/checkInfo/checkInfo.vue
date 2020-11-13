@@ -167,7 +167,7 @@ export default {
 }
 .vop_checkInfo_item{
   width:320px;
-  margin:25px 25px 0 0;
+  margin:25px 19px 0 0;
   .vop_checkInfo_items{
     display: inline-block;
     width:70px;

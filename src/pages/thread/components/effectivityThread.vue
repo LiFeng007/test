@@ -5,6 +5,7 @@
      v-on:export="handleRow"
      v-on:retrieval="retrieval"
      text="有效线索列表"
+     :drawer="drawer"
     />
     <!-- 检索信息输入 -->
     <Check-info/>
@@ -156,6 +157,7 @@ export default {
      dialogVisibleExport:false,
      multipleSelection: new Array(),
      vopId:'',
+     drawer:false,
      tableData:[{
           threadId: '11001',
           date: '2016-05-01',
@@ -294,7 +296,7 @@ export default {
     },
     // 高级检索业务
     retrieval(event){
-      console.log('选择了高级检索' , event.target)
+      this.drawer = true
     },
      deleteRow(index, rows) {
         // rows.splice(index, 1);

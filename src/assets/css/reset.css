@@ -91,3 +91,16 @@ a{text-decoration:none;}
   display:none !important;
   color:red
 }
+/* UI */
+.el-button--primary{
+    background:#30BF94;
+    border:1px solid #30BF94;
+}
+.el-button--primary:hover{
+    background:#30BF94;
+    border:1px solid #30BF94;
+}
+.el-button--primary:focus{
+    background:#30BF94;
+    border:1px solid #30BF94;
+}

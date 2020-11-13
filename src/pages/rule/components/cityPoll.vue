@@ -136,6 +136,11 @@
       width="180">
     </el-table-column>
 
+    <el-table-column
+      prop="updatePeople"
+      label="修改人"
+      width="120">
+    </el-table-column>
 
     <el-table-column
       prop="setWeight"
@@ -324,7 +329,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
         }, {
           provinceCode:110000,
           provinceName: '北京市' ,
@@ -336,7 +342,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
         }, {
           provinceCode:110000,
           provinceName: '北京市' ,
@@ -348,7 +355,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
         }, {
           provinceCode:110000,
           provinceName: '北京市' ,
@@ -360,7 +368,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
         }, {
            provinceCode:110000,
           provinceName: '北京市' ,
@@ -372,7 +381,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
 
         }, {
            provinceCode:110000,
@@ -385,7 +395,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
         }, {
            provinceCode:110000,
           provinceName: '北京市' ,
@@ -397,7 +408,8 @@ export default {
           storeCode:110001001,
           createdTime:'2020-11-12 11:00',
           createdPro:'管理员1',
-          updateTime:'2020-11-22 11:01'
+          updateTime:'2020-11-22 11:01',
+          updatePeople:'管理员二'
       }],
       // 门店测试数据
       storeTest:[

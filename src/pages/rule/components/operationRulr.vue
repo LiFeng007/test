@@ -57,13 +57,17 @@
     <el-table-column
       label="操作"
       width="222">
-      <template slot-scope="scope">
+      <template  slot-scope="scope">
+        <el-tooltip  :disabled="isTip" content="轻击后拖拽调整顺序" placement="top">
          <el-button
           type="text"
           size="small"
+          @click="rowDrop"
+          class="vop_rulr_drop"
           >
           调整
         </el-button>
+        </el-tooltip>
          <el-button
           type="text"
           size="small"
@@ -99,10 +103,12 @@
 </template>
 <script>
 import PagIng from '@/components/paging/paging.vue'
+import Sortable from 'sortablejs'
 export default {
   name:"operationRulr",
   data(){
     return{
+      isTip:false,
       tableData:[{
           ruleName: '风险配置' ,
           ruleType:'高风险线索',
@@ -188,6 +194,27 @@ export default {
     threadInfo(vopId , path , data){
         this.$router.push({path:this.$route.path + path , query: { id: vopId }})
     },
+    // 拖拽函数
+     rowDrop() {
+      this.isTip = true
+      const tbody = document.querySelector('.vop_operation_rulr .el-table__body-wrapper tbody')
+      const _this = this
+      Sortable.create(tbody, {
+        onEnd({ newIndex, oldIndex }) {
+          // console.log(_this.tableData[newIndex], _this.tableData[oldIndex])
+          const currRow = _this.tableData.splice(oldIndex, 1)[0]
+          _this.tableData.splice(newIndex, 0, currRow)
+        }
+      })
+    },
+  },
+  mounted(){
+    // 清除拖拽表格时的事件冒泡
+    document.body.ondrop = function (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  //  this.rowDrop()
   },
   components:{PagIng}
 }

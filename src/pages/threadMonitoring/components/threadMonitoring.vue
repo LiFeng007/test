@@ -194,7 +194,6 @@ export default {
   methods:{
     // 单个导出 
     handleRowSingle(vopId , row){
-      console.log(vopId , row)
       this.dialogVisibleExport = true
       this.multipleSelection = []
       this.multipleSelection.push(row)

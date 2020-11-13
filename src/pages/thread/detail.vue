@@ -19,7 +19,7 @@
   @change="handleChange"
   >
   <!-- 基本信息 -->
-  <el-collapse-item title="基本信息" name="1" class="basicionInfo">
+  <el-collapse-item title="基本信息" name="1" class="basicionInfo" :disabled="true">
     <div class="vop_detail_basicInfo">
      <ul>
        <li>
@@ -73,7 +73,7 @@
     </div>
   </el-collapse-item>
   <!-- 意向信息 -->
-  <el-collapse-item title="意向信息" name="2" class="intentionInfo">
+  <el-collapse-item title="意向信息" name="1" class="intentionInfo" :disabled="true">
     <div class="vop_detail_intentionInfo">
       <ul>
       <li>
@@ -124,7 +124,7 @@
     </div>
   </el-collapse-item>
   <!-- 试驾信息 -->
-  <el-collapse-item title="试驾信息" name="3" class="testDriveInfo">
+  <el-collapse-item title="试驾信息" name="1" class="testDriveInfo" :disabled="true">
    <div class="vop_detail_testDriveInfo">
       <ul>
       <li>
@@ -180,7 +180,7 @@
     </ul>
    </div>
   </el-collapse-item>
-  <el-collapse-item title="跟进信息" name="4" class="followUpInfo">
+  <el-collapse-item title="跟进信息" name="1" class="followUpInfo" :disabled="true">
     <div class="vop_detail_followUpInfo">
     <!-- 外呼跟进记录 -->
    <div class="vop_detail_callFollowUp">
@@ -476,6 +476,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vop_thread_detail{
+  /deep/.el-collapse-item__header{
+    color:black;
+  }
+  /deep/.el-collapse-item__arrow.is-active{
+    display:none
+  }
   display: flex;
   height: 100%;
   flex-direction: column;
