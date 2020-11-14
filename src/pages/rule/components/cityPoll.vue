@@ -13,7 +13,8 @@
     <div class="vop_checkInfo">
       <!-- 主内容区 -->
      <div class="vop_checkInfo_main">
-       <!-- 省份名称 -->
+      <div>
+         <!-- 省份名称 -->
     <div class="vop_checkInfo_item">
       <span class="vop_checkInfo_items">省份名称</span>
       <el-input v-model="provinceValue" placeholder="请输入省份名称"></el-input>
@@ -28,7 +29,9 @@
       <span class="vop_checkInfo_items">城市名称</span>
       <el-input v-model="cityValue" placeholder="请输入城市名称"></el-input>
     </div>
-    <!-- 城市编码 -->
+      </div>
+    <div>
+      <!-- 城市编码 -->
      <div class="vop_checkInfo_item">
        <span class="vop_checkInfo_items">城市编码</span>
        <el-input v-model="cityCode" placeholder="请输入城市编码"></el-input>
@@ -43,6 +46,7 @@
           <span class="vop_checkInfo_items">SMP编码</span>
           <el-input v-model="storeCode" placeholder="请输入门店编码"></el-input>
       </div>
+    </div>
 
     </div>
       <!-- 重置&&查询 -->
@@ -64,7 +68,9 @@
 
     </div>
     <!-- 内容检索区域 -->
-    <div class="vop_serarchList">
+    <div class="vop_serarchList"
+         :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
+    >
      <el-table
       height="400"
       :data="tableData"
@@ -72,81 +78,81 @@
     <el-table-column
       prop="provinceCode"
       label="省份编码"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="provinceName"
       label="省份名称"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="cityCode"
       label="城市编码"
-      width="120">
+      min-width="120">
     </el-table-column>
     
     <el-table-column
       prop="cityName"
       label="城市名称"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="areaCode"
       label="区县编码"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="areaName"
       label="区县名称"
-      width="120">
+      min-width="120">
     </el-table-column>
 
      <el-table-column
       prop="storeCode"
       label="SMP编号"
-      width="120">
+      min-width="120">
     </el-table-column>
 
      <el-table-column
       prop="storeName"
       show-overflow-tooltip
       label="SMP名称"
-      width="180">
+      min-width="180">
     </el-table-column>
      
      <el-table-column
       prop="createdTime"
       label="创建时间"
-      width="180">
+      min-width="180">
     </el-table-column>
 
      <el-table-column
       prop="createdPro"
       label="创建人"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="updateTime"
       label="修改时间"
-      width="180">
+      min-width="180">
     </el-table-column>
 
     <el-table-column
       prop="updatePeople"
       label="修改人"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="setWeight"
       label="操作"
       fixed="right"
-      width="120">
+      min-width="150">
       <template slot-scope="scope">
          <el-button
           type="text"
@@ -554,4 +560,25 @@ export default {
     }
   }
 }
+</style>
+<style lang="scss" scoped>
+.vop_city_poll{
+  height:100%;
+}
+.vop_serarchList{
+    margin-top:10px;
+    height:56%;
+    -moz-height:360px;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
+  }
 </style>

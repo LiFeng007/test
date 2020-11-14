@@ -9,7 +9,9 @@
     <!-- 检索信息输入 -->
     <Check-info/>
      <!-- 主内容区 -->
-    <div class="vop_serarchList vop_highrisk_serarchList">
+    <div class="vop_serarchList" 
+      :class="tableData.length > 6 ? vop_serarchList2 : ''"
+    >
      <el-table
       height="400"
       :data="tableData"
@@ -19,79 +21,79 @@
       fixed
       prop="threadId"
       label="线索ID"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="type"
       label="线索类型"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="rulename"
       label="命中风险规则名称"
-      width="200">
+      min-width="200">
     </el-table-column>
 
     <el-table-column
       prop="VopId"
       label="VOP ID"
-      width="120">
+      min-width="120">
     </el-table-column>
     
     <el-table-column
       prop="name"
       label="姓名"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="phone"
       label="手机号"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="province"
       label="意向省份"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="city"
       label="意向城市"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="origin"
       label="来源渠道"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="group"
       label="分组"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="date"
       label="上报时间"
-      width="200">
+      min-width="200">
     </el-table-column>
 
     <el-table-column
       prop="evaluate"
       label="业务评级"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       fixed="right"
       label="操作"
-      width="120">
+      min-width="120">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="threadInfo(scope.row.VopId, tableData)"
@@ -224,6 +226,24 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-
+<style lang="scss" scoped>
+    .vop_highrisk_thread{
+      height:100%;
+    }
+    .vop_serarchList{
+    margin-top:10px;
+    height:62%;
+    -moz-height:360px;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
+  }
 </style>

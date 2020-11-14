@@ -4,7 +4,8 @@
     <div class="vop_checkInfo">
       <!-- 主内容区 -->
      <div class="vop_checkInfo_main">
-       <!-- 线索ID -->
+        <div>
+            <!-- 线索ID -->
     <div class="vop_checkInfo_item">
       <span class="vop_checkInfo_items">ID</span>
       <el-input v-model="threadId" placeholder="请输入规则名称"></el-input>
@@ -39,7 +40,9 @@
             </el-option>
       </el-select>
     </div>
-    <!-- 省份 -->
+        </div>
+        <div>
+          <!-- 省份 -->
      <div class="vop_checkInfo_item">
        <span class="vop_checkInfo_items">意向省份</span>
        <el-select v-model="provinceValue" placeholder="请选择" @change="chooseProvince" clearable filterable>
@@ -75,6 +78,7 @@
           </el-option>
        </el-select>
       </div>
+        </div>
     </div>
       <!-- 重置&&查询 -->
       <div class="vop_checkInfo_query">
@@ -95,7 +99,9 @@
 
     </div>
     <!-- 内容检索区域 -->
-    <div class="vop_serarchList">
+    <div class="vop_serarchList"
+    :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
+    >
      <el-table
       height="400"
       :data="tableData"
@@ -103,43 +109,43 @@
     <el-table-column
       prop="vopId"
       label="ID"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="ruleName"
       label="名称"
-      width="200">
+      min-width="200">
     </el-table-column>
 
     <el-table-column
       prop="address"
       label="地址"
-      width="240">
+      min-width="240">
     </el-table-column>
     
     <el-table-column
       prop="person"
       label="区域负责人"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="distributorType"
       label="经销商类型"
-      width="180">
+      min-width="180">
     </el-table-column>
 
     <el-table-column
       prop="weight"
       label="权重"
-      width="120">
+      min-width="100">
     </el-table-column>
 
     <el-table-column
       prop="setWeight"
       label="修改权重"
-      width="120">
+      min-width="100">
       <template slot-scope="scope">
          <el-button
           type="text"
@@ -154,7 +160,7 @@
 
     <el-table-column
       label="线索下发录出"
-      width="120">
+      min-width="120">
       <template slot-scope="scope">
          <el-button
           type="text"
@@ -364,6 +370,7 @@ export default {
 
 <style lang="scss" scoped>
   .vop_rule_dealer_list{
+    height:100%;
     .vop_checkInfo{
       margin-top:20px;
     }
@@ -376,6 +383,22 @@ export default {
     }
     .vop_close_issue /deep/.el-dialog__body{
       text-align: center;
+    }
+  }
+  .vop_serarchList{
+    margin-top:10px;
+    height:63%;
+    -moz-height:360px;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
     }
   }
 </style>

@@ -8,7 +8,9 @@
     @click.native.prevent="threadInfo(null , '/风险配置详情' )"
     >新增规则</el-button>
     <!-- 检索列表 -->
-    <div class="vop_serarchList">
+    <div class="vop_serarchList"
+    :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
+    >
      <el-table
       height="430"
       :data="tableData"
@@ -16,42 +18,42 @@
     <el-table-column
       prop="sort"
       label="排序"
-      width="120">
+      min-width="10%">
     </el-table-column>
 
     <el-table-column
       prop="ruleName"
       label="规则名称"
-      width="200">
+      min-width="17%">
     </el-table-column>
 
     <el-table-column
       prop="targetType"
       label="指标类型"
-      width="200">
+      min-width="16%">
     </el-table-column>
     
 
     <el-table-column
       prop="date"
       label="创建时间"
-      width="200">
+      min-width="17%">
     </el-table-column>
 
     <el-table-column
       prop="founder"
       label="创建人"
-      width="120">
+      min-width="10%">
     </el-table-column>
 
     <el-table-column
       prop="status"
       label="状态"
-      width="120">
+      min-width="10%">
     </el-table-column>
     <el-table-column
       label="操作"
-      width="260">
+      min-width="21%">
       <template slot-scope="scope">
 
          <el-button
@@ -185,6 +187,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vop_operation_risk{
+  height:100%;
   // 新增规则按钮
   .operation_add_risk{
     margin-top:15px
@@ -192,6 +195,38 @@ export default {
   //分頁
   .operation_paging{
     margin-top:9%;
+  }
+  .vop_rule_dealer_list{
+    height:100%;
+    .vop_checkInfo{
+      margin-top:20px;
+    }
+    .vop_checkInfo_items{
+      width: 80px;
+    font-size: 13px;
+    }
+    /deep/.el-dialog{
+      height:150px;
+    }
+    .vop_close_issue /deep/.el-dialog__body{
+      text-align: center;
+    }
+  }
+  .vop_serarchList{
+    margin-top:10px;
+    height:59%;
+    -moz-height:360px;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
   }
 }
 </style>

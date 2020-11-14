@@ -26,10 +26,10 @@
       </article>
     </div>
     <!-- 主体内容 -->
-     <div class="vop_serarchList">
+     <div class="vop_threadMonitoring_List" ref="vop_threadMonitoring_List">
      <el-table
      :span-method="objectSpanMethod"
-      height="440px"
+      height="400"
       :data="tableData"
       style="width: 100% ; margin-top:20px;"
     >
@@ -37,36 +37,42 @@
     <el-table-column
       prop="circulationStage"
       label="流转阶段"
-      width="150">
+      min-width="150"
+      >
     </el-table-column>
 
     <el-table-column
       prop="leadsNum"
       label="线索总量(条)"
-      width="200">
+      min-width="200"
+      >
     </el-table-column>
 
     <el-table-column
       prop="classify"
       label="分类"
-      width="300">
+      min-width="300"
+      >
     </el-table-column>
     
     <el-table-column
       prop="classifyLeadsNum"
       label="分类线索总量(条)"
-      width="200">
+      min-width="180"
+      >
     </el-table-column>
 
     <el-table-column
       prop="date"
       label="时间"
-      width="200">
+      min-width="200"
+      >
     </el-table-column>
     
     <el-table-column
       label="操作"
-      width="160">
+      min-width="160"
+      >
       <template slot-scope="scope">
         <el-button
          @click="handleRowSingle(scope.$index , scope.row)"
@@ -94,6 +100,7 @@ export default {
   components:{HeaderInfo , ExportInfo},
   data(){
     return{
+      height:'440px',
       temr:'',
       circulationStage:'',
       spanArr: [],//用于存放每一行记录的合并数
@@ -187,10 +194,31 @@ export default {
       }],
     }
   },
+  created(){
+    let heightStyle = this.$refs.vop_threadMonitoring_List.clientHeight
+    this.height = heightStyle + 'px'
+  },
   mounted(){
     this.getSpanArr(this.tableData)
     this.multipleSelection = JSON.parse(JSON.stringify(this.tableData))
+    // this.getHeight()
+    //增加监听事件，窗口变化时得到高度。
+    // window.addEventListener('resize',this.getHeight,false)
+    
   },
+  updated(){
+    let that = this
+     window.onresize = () => {
+      return (() => {
+        let heightStyle = that.$refs.vop_threadMonitoring_List.clientHeight
+        that.height = heightStyle + 'px'
+      })()
+    }
+  },
+  beforeDestroy(){
+       window.onresize = null
+  },
+
   methods:{
     // 单个导出 
     handleRowSingle(vopId , row){
@@ -202,6 +230,7 @@ export default {
     setdialogVisibleExport(payload){
       this.dialogVisibleExport = payload
     },
+    
     // 批导
     handleRow(){
       if(this.multipleSelection.length === 0){
@@ -249,6 +278,17 @@ export default {
 
 <style lang="scss" scoped>
 .vop_leads_monitoring{
+  height:98%;
+  .vop_threadMonitoring_List{
+    height:70%;
+    /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
+  }
+
   .vop_leads_circulation{
     /deep/.el-date-editor{
       width:500px;

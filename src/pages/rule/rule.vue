@@ -4,7 +4,7 @@
     :list="data"
     />
     <div class="vop_rule_right">
-      <router-view />
+      <router-view style="height:100%;" />
     </div>
   </div>
 </template>
@@ -55,7 +55,8 @@ export default {
     overflow: hidden;
     .vop_rule_right{
       padding:20px 56px 0 27px;
-      flex:1;
+      height:100%;
+      width:100%;
       overflow-y: auto;
     }
   }

@@ -2,7 +2,7 @@
   <div>
     <Two-level-tab :routeInfo="routeInfo" />
     <div class="vop_dealer_rule_right">
-      <router-view></router-view>
+      <router-view style="height:100%;"></router-view>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vop_dealer_rule_right{
-  flex:1
+  width:100%;
+  height:100%;
 }
 </style>

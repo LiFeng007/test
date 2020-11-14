@@ -5,7 +5,9 @@
     :routeInfo="routeInfo"
     v-if="$store.state.threeTabStatus"
     />
-      <router-view></router-view>
+    <div class="vop_special_right">
+      <router-view style="height:100%"></router-view>
+    </div>
   </div>
 </template>
 <script>
@@ -28,6 +30,8 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-
+<style lang="scss" scoped>
+  .vop_special_right{
+    height:100%;
+  }
 </style>

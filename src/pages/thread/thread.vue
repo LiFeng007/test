@@ -61,9 +61,13 @@ export default {
     height:calc(100% - 40px);
     overflow: auto;
     .vop_thread_right{
+      width:100%;
       padding:20px 56px 0 27px;
-      flex:1;
+      height:calc(100% - 20px);
       overflow-y: auto;
+      &>div:first-child{
+        height:90%;
+      }
     }
   }
 </style>

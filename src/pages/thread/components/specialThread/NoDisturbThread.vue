@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%">
     <!-- 组件头部信息 -->
     <Header-info 
      @retrieval="retrieval"
@@ -10,7 +10,9 @@
      <!-- 检索信息填写区域 -->
     <Check-info/>
     <!-- 主内容 -->
-    <div class="vop_serarchList vop_moblist_serarchList">
+    <div class="vop_serarchList vop_moblist_serarchList" 
+        :class="tableData.length > 6 ? vop_moblist_serarchList2 : ''"
+      >
      <el-table
       height="360"
       :data="tableData"
@@ -20,85 +22,85 @@
       fixed
       prop="threadId"
       label="线索ID"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="type"
       label="线索类型"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="VopId"
       label="VOP ID"
-      width="120">
+      min-width="120">
     </el-table-column>
     
     <el-table-column
       prop="name"
       label="姓名"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="phone"
       label="手机号"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="province"
       label="意向省份"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="city"
       label="意向城市"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="origin"
       label="来源渠道"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="group"
       label="分组"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="date"
       label="上报时间"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="evaluate"
       label="业务评级"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="empower"
       label="是否完成授权"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
         prop="state"
         label="状态"
-        width="120">
+        min-width="120">
       </el-table-column>
 
     <el-table-column
       fixed="right"
       label="操作"
-      width="120">
+      min-width="140">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="threadInfo(scope.row.VopId, tableData)"
@@ -174,7 +176,7 @@ export default {
           empower:'是',
           state:'回传待下发',
           origin: '门店质询',
-        }
+        },
       ]
     }
   },
@@ -211,4 +213,19 @@ export default {
 .vop_moblist_serarchList{
   margin-top:10px;
 }
+.vop_moblist_serarchList{
+    height:58%;
+    /deep/.el-table {
+      height:100% !important;
+    }
+   
+  }
+  .vop_moblist_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
+  }
 </style>

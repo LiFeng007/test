@@ -8,7 +8,9 @@
     @click.native.prevent="threadInfo(null , '/业务条件规则配置详情' )"
     >新增规则</el-button>
     <!-- 检索列表 -->
-    <div class="vop_serarchList">
+    <div class="vop_serarchList"
+    :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
+    >
      <el-table
       height="430"
       :data="tableData"
@@ -16,47 +18,47 @@
     <el-table-column
       prop="priority"
       label="优先级"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="ruleName"
       label="规则名称"
-      width="200">
+      min-width="200">
     </el-table-column>
 
     <el-table-column
       prop="ruleType"
       label="规则类型"
-      width="120">
+      min-width="120">
     </el-table-column>
     
     <el-table-column
       prop="platform"
       label="下发平台"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="date"
       label="创建时间"
-      width="200">
+      min-width="180">
     </el-table-column>
 
     <el-table-column
       prop="founder"
       label="创建人"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="status"
       label="状态"
-      width="120">
+      min-width="120">
     </el-table-column>
     <el-table-column
       label="操作"
-      width="222">
+      min-width="222">
       <template  slot-scope="scope">
         <el-tooltip  :disabled="isTip" content="轻击后拖拽调整顺序" placement="top">
          <el-button
@@ -221,6 +223,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vop_operation_rulr{
+  height:100%;
   // 新增规则按钮
   .operation_add_rulr{
     margin-top:15px
@@ -230,4 +233,20 @@ export default {
     margin-top:9%;
   }
 }
+ .vop_serarchList{
+    margin-top:10px;
+    height:59%;
+    -moz-height:360px;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
+  }
 </style>

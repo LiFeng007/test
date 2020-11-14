@@ -148,6 +148,7 @@ export default {
     margin-top:15px;
     background:white;
     // height:40%;
+    // height:40%;
   }
 
   // 修改一些element样式

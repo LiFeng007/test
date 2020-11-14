@@ -4,8 +4,8 @@
     :routeInfo="routeInfo"
     v-if="$store.state.threeTabStatus"
     />
-    <div>
-      <router-view></router-view>
+    <div style="height:100%">
+      <router-view style="height:100%"></router-view>
     </div>
   </div>
 </template>

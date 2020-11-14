@@ -51,7 +51,9 @@ export default {
 <style lang="scss" scoped>
  .vop_header{
    display: flex;
-   width: 100%;
+   justify-content: space-between;
+   padding:0 2%;
+   width: 96%;
     left: 0px;
     top: 0px;
     height: 40px;
@@ -99,7 +101,6 @@ export default {
     line-height: 40px;
     font-size:20px;
     font-weight:400;
-    margin:0 20% 0 20%;
     justify-content: space-around;
 
     div{

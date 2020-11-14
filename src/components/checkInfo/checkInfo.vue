@@ -2,62 +2,66 @@
     <div class="vop_checkInfo">
       <!-- 主内容区 -->
      <div class="vop_checkInfo_main">
-       <!-- 线索ID -->
-    <div class="vop_checkInfo_item">
-      <span class="vop_checkInfo_items">线索ID</span>
-      <el-input v-model="threadId" placeholder="请输入内容"></el-input>
-    </div>
-    <!-- VOP ID -->
-    <div class="vop_checkInfo_item">
-      <span class="vop_checkInfo_items">VOP ID</span>
-      <el-input v-model="VopId" placeholder="请输入内容"></el-input>
-    </div>
-    <!-- 手机号 -->
-    <div class="vop_checkInfo_item">
-      <span class="vop_checkInfo_items">手机号</span>
-      <el-input v-model="phone" placeholder="请输入内容"></el-input>
-    </div>
-    <!-- 来源渠道 -->
-    <div class="vop_checkInfo_item">
-      <span class="vop_checkInfo_items">来源渠道</span>
-      <el-input v-model="origin" placeholder="请输入内容"></el-input>
-    </div>
-    <!-- 意向省份 -->
-     <div class="vop_checkInfo_item">
-       <span class="vop_checkInfo_items">意向省份</span>
-       <el-select 
-            v-on:change="getProv($event)"
-            v-model="selectProv" 
-            filterable 
-            placeholder="请选择"
-            clearable
-            >
-            <el-option
-            :key="index"
-             v-for="(item1 , index) in provs"
-            :label="item1.label"
-            :value="item1.value">  
-            </el-option>
-        </el-select>
-     </div>
-     <!-- 意向城市 -->
+    <div>
+         <!-- 线索ID -->
         <div class="vop_checkInfo_item">
-          <span class="vop_checkInfo_items">意向城市</span>
-          <el-select 
-           v-on:change="getCity($event)"
-           v-model="selectCity" 
-           filterable 
-           placeholder="请选择"
-           clearable
-           >
-            <el-option
-              v-for="(item , index) in citys"
-              :key="index"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-        </el-select>
+          <span class="vop_checkInfo_items">线索ID</span>
+          <el-input v-model="threadId" placeholder="请输入内容"></el-input>
         </div>
+        <!-- VOP ID -->
+        <div class="vop_checkInfo_item">
+          <span class="vop_checkInfo_items">VOP ID</span>
+          <el-input v-model="VopId" placeholder="请输入内容"></el-input>
+        </div>
+        <!-- 手机号 -->
+        <div class="vop_checkInfo_item">
+          <span class="vop_checkInfo_items">手机号</span>
+          <el-input v-model="phone" placeholder="请输入内容"></el-input>
+        </div>
+    </div>
+      <div>
+        <!-- 来源渠道 -->
+        <div class="vop_checkInfo_item">
+          <span class="vop_checkInfo_items">来源渠道</span>
+          <el-input v-model="origin" placeholder="请输入内容"></el-input>
+        </div>
+        <!-- 意向省份 -->
+        <div class="vop_checkInfo_item">
+          <span class="vop_checkInfo_items">意向省份</span>
+          <el-select 
+                v-on:change="getProv($event)"
+                v-model="selectProv" 
+                filterable 
+                placeholder="请选择"
+                clearable
+                >
+                <el-option
+                :key="index"
+                v-for="(item1 , index) in provs"
+                :label="item1.label"
+                :value="item1.value">  
+                </el-option>
+            </el-select>
+        </div>
+        <!-- 意向城市 -->
+         <div class="vop_checkInfo_item">
+              <span class="vop_checkInfo_items">意向城市</span>
+              <el-select 
+              v-on:change="getCity($event)"
+              v-model="selectCity" 
+              filterable 
+              placeholder="请选择"
+              clearable
+              >
+                <el-option
+                  v-for="(item , index) in citys"
+                  :key="index"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+            </el-select>
+         </div>
+      </div>
     </div>
       <!-- 重置&&查询 -->
       <div class="vop_checkInfo_query">
@@ -150,22 +154,28 @@ export default {
 
 <style lang="scss">
 .vop_checkInfo{
-  display: flex;
+  display:flex;
   background: white;
   border:1px solid #d7d7d7;
 }
 .vop_checkInfo_query{
   padding:0 0 29px 29px;
   margin:56px 20px 0 0;
-
+  width:20%;
 }
 .vop_checkInfo_main{
-  display: flex;
+  width:100%;
+   &>div{
+    display: flex;
+    width: 90%;
+  }
   flex-wrap: wrap;
   padding:0 0 29px 29px;
   margin-top:22px;
 }
 .vop_checkInfo_item{
+  display: flex;
+  align-items: center;
   width:320px;
   margin:25px 19px 0 0;
   .vop_checkInfo_items{

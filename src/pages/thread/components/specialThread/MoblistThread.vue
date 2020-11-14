@@ -20,83 +20,83 @@
       fixed
       prop="threadId"
       label="线索ID"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="type"
       label="线索类型"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="VopId"
       label="VOP ID"
-      width="120">
+      min-width="120">
     </el-table-column>
     
     <el-table-column
       prop="name"
       label="姓名"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="phone"
       label="手机号"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="province"
       label="意向省份"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="city"
       label="意向城市"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="origin"
       label="来源渠道"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="platform"
       label="来源平台"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="date"
       label="上报时间"
-      width="120">
+      min-width="120">
     </el-table-column>
     <el-table-column
       prop="evaluate"
       label="业务评价"
-      width="120">
+      min-width="120">
     </el-table-column>
     <el-table-column
       prop="empower"
       label="是否完成授权"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       prop="marks"
       label="备注"
-      width="120">
+      min-width="120">
     </el-table-column>
 
     <el-table-column
       fixed="right"
       label="操作"
-      width="120">
+      min-width="140">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="threadInfo(scope.row.VopId, tableData)"
@@ -270,6 +270,62 @@ export default {
           empower:'是',
           platform:'VOP 系统',
           marks:'这是备注信息'
+        },{
+          threadId: '11001',
+          date: '2016-05-01',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
+        }, {
+          threadId: '11001',
+          date: '2016-05-02',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
+        },{
+          threadId: '11001',
+          date: '2016-05-01',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
+        }, {
+          threadId: '11001',
+          date: '2016-05-02',
+          VopId: '威马007',
+          phone: '86-13734656689',
+          city: '南京市',
+          origin: '门店质询',
+          province: "上海市",
+          type:'白名单线索',
+          name:'小绿',
+          evaluate:'一般般~',
+          empower:'是',
+          platform:'VOP 系统',
+          marks:'这是备注信息'
         }
       ]
     }
@@ -333,14 +389,19 @@ export default {
 
 <style lang="scss" scoped>
 .vop_MoblistThread{
+  height:100%;
   .vop_MoblistThread_header{
     margin-top:15px;
     margin-bottom:10px;
   }
-  .vop_moblist_serarchList{
-    // -moz-height:360px;
-    height:370px;
-    margin-top:10px;
+  .vop_serarchList{
+    height:59%;
+    /deep/.el-table {
+      height:100% !important;
+    }
+    /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
+      height:100% !important;
+    }
   }
   // 加入黑名单弹出框
   // 检索
@@ -462,5 +523,7 @@ export default {
 
   }
   }
+
+
 
 </style>
