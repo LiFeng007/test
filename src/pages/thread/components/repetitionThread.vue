@@ -7,14 +7,16 @@
      text="重复线索列表"
     />
     <!-- 检索信息输入 -->
-    <Check-info/>
+    <Check-info
+    reqMethods=""
+    />
      <!-- 主内容区 -->
     <div class="vop_serarchList"
      :class="tableData.length > 6 ? vop_serarchList2 : ''"
     >
      <el-table
       height="400"
-      :data="tableData"
+      :data="testData.length ? testData : tableData "
       style="width: 100% ; margin-top:20px;"
     >
     <el-table-column
@@ -127,6 +129,7 @@ export default {
     return{
        vopId:'',
        dialogVisible:false, 
+       testData:'',
        tableData: [
         {
           threadId: '11001',
@@ -157,6 +160,10 @@ export default {
     }
   },
   methods:{
+    // 更新列表
+    updList(date){
+      this.testData = date
+    },
     // 导出业务 ==> 单个
     handleRow(index, rows){
         console.log( '单个导出',index, rows[index])

@@ -10,31 +10,34 @@
     :ifExport="false"
     />
     <!-- 检索信息填写区域 -->
-    <Check-info/>
+    <Check-info
+    reqMethods="queryWhiteList"
+    @updList = "updList"
+    />
     <!-- 主内容区 -->
     <div class="vop_serarchList"
       :class="tableData.length > 6 ? vop_serarchList2 : ''"
     >
      <el-table
       height="370"
-      :data="tableData"
+      :data="testData.length ? testData : tableData "
       style="width: 100% ; margin-top:20px;"
     >
     <el-table-column
       fixed
-      prop="threadId"
+      prop="leadsId"
       label="线索ID"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="type"
+      prop="leadsType"
       label="线索类型"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="VopId"
+      prop="vopId"
       label="VOP ID"
       min-width="120">
     </el-table-column>
@@ -52,19 +55,19 @@
     </el-table-column>
 
     <el-table-column
-      prop="province"
+      prop="intentionProvinceName"
       label="意向省份"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="city"
+      prop="intentionCityName"
       label="意向城市"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="origin"
+      prop="sourceChannelName"
       label="来源渠道"
       min-width="120">
     </el-table-column>
@@ -76,7 +79,7 @@
     </el-table-column>
 
     <el-table-column
-      prop="date"
+      prop="reportTime"
       label="上报时间"
       min-width="120">
     </el-table-column>
@@ -88,7 +91,7 @@
     </el-table-column>
 
     <el-table-column
-      prop="empower"
+      prop="isauth"
       label="是否完成授权"
       min-width="120">
     </el-table-column>
@@ -147,6 +150,7 @@ export default {
     return{
       vopId:'',
       dialogVisible:false, 
+      testData:'',
       tableData: [
         {
           threadId: '11001',
@@ -181,6 +185,10 @@ export default {
     }
   },
   methods:{
+    // 更新列表
+    updList(date){
+      this.testData = date
+    },
     retrieval(event){
       console.log('选择了高级检索' , event.target)
     },

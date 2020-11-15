@@ -9,22 +9,26 @@
       text="黑名单潜客线索"
     />
     <!-- 检索信息填写区域 -->
-    <Check-info />
+    <Check-info 
+    reqMethods="queryMobList"
+    @updList = "updList"
+    
+    />
     <!-- 主内容区 -->
     <div class="vop_serarchList vop_moblist_serarchList">
      <el-table
       height="370"
-      :data="tableData"
+     :data="testData.length ? testData : tableData "
     >
     <el-table-column
       fixed
-      prop="threadId"
+      prop="leadsId"
       label="线索ID"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="type"
+      prop="leadsType"
       label="线索类型"
       min-width="120">
     </el-table-column>
@@ -48,19 +52,19 @@
     </el-table-column>
 
     <el-table-column
-      prop="province"
+      prop="intentionProvinceName"
       label="意向省份"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="city"
+      prop="intentionCityName"
       label="意向城市"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="origin"
+      prop="sourceChannelName"
       label="来源渠道"
       min-width="120">
     </el-table-column>
@@ -72,7 +76,7 @@
     </el-table-column>
 
     <el-table-column
-      prop="date"
+      prop="reportTime"
       label="上报时间"
       min-width="120">
     </el-table-column>
@@ -82,13 +86,13 @@
       min-width="120">
     </el-table-column>
     <el-table-column
-      prop="empower"
+      prop="isauth"
       label="是否完成授权"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="marks"
+      prop="remarks"
       label="备注"
       min-width="120">
     </el-table-column>
@@ -241,6 +245,7 @@ export default {
     MobVopId:'',
     // 加入黑名单备注信息
     mobil_textarea:'',
+    testData:'',
       tableData: [
         {
           threadId: '11001',
@@ -331,6 +336,10 @@ export default {
     }
   },
   methods:{
+    // 更新列表
+    updList(date){
+      this.testData = date
+    },
     // 黑名单弹出框显示
     vopExport(){this.dialogVisibleMobToast = true},
     handleClose() {

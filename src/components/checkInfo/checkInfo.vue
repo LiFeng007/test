@@ -90,8 +90,15 @@
 import data from '@/static/city.json'
 // 状态管理
 import * as types from '@/store/types'
+
+import {queryDefeat , queryEffective , queryMobList , queryDisturb , queryWhiteList} from '@/api/leads'
 export default {
   inject:['reloadAll'],
+  props:{
+    reqMethods:{
+      required:true,
+    }
+  },
   data() {
       return {
         // 省市联动
@@ -112,11 +119,14 @@ export default {
     methods:{
       // 请求数据
       async getList(){
-       let res = await this.$http.post('http://47.116.74.91:3003/users/login', {
-                username: this.username,
-                password: this.password
-            })
-        this.$store.commit(types.UPDATE_SERARCHLIST , res.data)
+        let data = ''
+        if(this.reqMethods === 'queryDefeat')  data = await queryDefeat()
+        else if (this.reqMethods === 'queryEffective') data = await queryEffective()
+        else if (this.reqMethods === 'queryMobList') data = await queryMobList()
+        else if (this.reqMethods === 'queryDisturb') data = await queryDisturb()
+        else if (this.reqMethods === 'queryWhiteList') data = await queryWhiteList()
+        else return 
+        this.$emit('updList' , data.data.data)
       },
       // 重置
       reset(){
@@ -192,11 +202,9 @@ export default {
   .vop_checkInfo_items{
     display: inline-block;
     width:40%;
-    // text-align: right;
+    text-align: right;
     font-size:0.4em;
-     overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap
+     margin-right: 1%;
   }
 }
 

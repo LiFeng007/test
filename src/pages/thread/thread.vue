@@ -4,10 +4,11 @@
     <LeftList 
     :list="data"
     />
+    <keep-alive>
     <div class="vop_thread_right">
       <router-view></router-view>
     </div>
-    
+    </keep-alive>
   </div>
 </template>
 <script>

@@ -317,7 +317,7 @@ export default {
       },
     // 修改权重
       setWeight(){
-        if (parseInt(this.setWeights.data) <= 100 && /^(100|[1-9]?\d(\.\d\d?\d?)?)%$|0$/.test(this.setWeights.data)){
+        if (parseInt(this.setWeights.data) <= 100 && /^(100|[1-9]?\d(\.\d\d?\d?)?)%$/.test(this.setWeights.data)){
         this.dialogVisible = false
         this.tableData[this.setWeights.index].weight = this.setWeights.data
         this.$message({message: '修改成功',type: 'success'});
@@ -375,8 +375,11 @@ export default {
       margin-top:20px;
     }
     .vop_checkInfo_items{
-      width: 80px;
-    font-size: 13px;
+      width:40%;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
     /deep/.el-dialog{
       height:150px;
@@ -395,6 +398,7 @@ export default {
   }
   .vop_checkInfo_item{
     margin-right:2%;
+
   }
   .vop_serarchList2{
      /deep/.el-table {

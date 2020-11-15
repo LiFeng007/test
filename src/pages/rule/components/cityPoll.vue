@@ -2,7 +2,7 @@
   <div class="vop_city_poll">
      <!-- 头部信息 -->
     <Header-info 
-     v-on:export="handleRow"
+     v-on:="handleRow"
      v-on:retrieval="retrieval"
      ExportText="新增"
      retrievalText="导出"

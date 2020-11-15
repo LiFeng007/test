@@ -8,14 +8,16 @@
      text="信息无效线索列表"
     />
     <!-- 检索信息输入 -->
-    <Check-info/>
+    <Check-info
+    reqMethods=""
+    />
     <!-- 检索列表 -->
     <div class="vop_serarchList"
     :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
     >
      <el-table
       height="370"
-      :data="tableData"
+     :data="testData.length ? testData : tableData "
     >
     <el-table-column
       prop="threadId"
@@ -140,6 +142,7 @@ export default {
     return{
       vopId:'',
       dialogVisible:false, 
+       testData:'',
       tableData:[{
           threadId: '11001',
           date: '2016-05-01',
@@ -249,6 +252,10 @@ export default {
     ])
   },
   methods:{
+    // 更新列表
+    updList(date){
+      this.testData = date
+    },
     // 导出业务 ==> 单个
     handleRow(index, rows){
         console.log( '单个导出',index, rows[index])

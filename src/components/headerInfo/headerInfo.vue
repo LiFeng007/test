@@ -13,7 +13,7 @@
       <el-button
       v-if="ifEetrieval"
       size="small"
-      @click="drawer = true"
+      @click="retrievalText === '导出' ? $emit('retrieval') : drawer = true"
       style="border:1px solid gray"
       >{{retrievalText}}</el-button>
      </div>
@@ -705,7 +705,10 @@ export default {
     }
   },
   watch:{
-   
+   leaveMoneyTimeGreater(newVal){
+    //  console.log(newVal)
+
+   }
   }
 }
 </script>

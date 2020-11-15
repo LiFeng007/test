@@ -86,7 +86,7 @@
       </li>
       <li>
         <span>意向县区:</span>
-        <span>{{intention.intentionArea}}</span>
+        <span>{{intention.intentionCoutry}}</span>
       </li>
       <li>
         <span>意向门店:</span>
@@ -106,19 +106,19 @@
       </li>
       <li>
         <span>意向内饰:</span>
-        <span>{{intention.intentionInterior}}</span>
+        <span>{{intention.intentionTrim}}</span>
       </li>
       <li>
         <span>意向外饰:</span>
-        <span>{{intention.intentionExteriorDecoration}}</span>
+        <span>{{intention.intentionExterior}}</span>
       </li>
       <li>
         <span>购车预算:</span>
-        <span>{{intention.carPurchaseBudget}}</span>
+        <span>{{intention.buyCarBudget}}</span>
       </li>
       <li>
         <span>预计购车时间:</span>
-        <span>{{intention.estimatedPurchaseTime}}</span>
+        <span>{{intention.buyCarTime}}</span>
       </li>
     </ul>
     </div>
@@ -129,11 +129,11 @@
       <ul>
       <li>
         <span>试驾到店ID:</span>
-        <span>{{testDriveInfo.test_drive_id}}</span>
+        <span>{{testDriveInfo.testDriveId}}</span>
       </li>
       <li>
         <span>试驾门店名称:</span>
-        <span>字段待定</span>
+        <span>{{testDriveInfo.testSmpName}}</span>
       </li>
       <li>
         <span>试驾人:</span>
@@ -145,7 +145,7 @@
       </li>
       <li>
         <span>试驾车系名称:</span>
-        <span>{{testDriveInfo.intentionCardStyle}}</span>
+        <span>{{testDriveInfo.testCarType}}</span>
       </li>
       <li>
         <span>试驾车型名称:</span>
@@ -153,16 +153,16 @@
       </li>
       <li>
         <span>服务大使名称:</span>
-        <span>{{testDriveInfo.servicePeo}}</span>
+        <span>{{testDriveInfo.waiterName}}</span>
       </li>
     </ul>
     <p>
       <span>车型快速评价:</span>
-      <span>{{testDriveInfo.carTypeFastDesc}}</span>
+      <span>{{testDriveInfo.fastDesc}}</span>
     </p>
     <p>
       <span>车型文字描述:</span>
-      <span>{{testDriveInfo.carTypeTxtDesc}}</span>
+      <span>{{testDriveInfo.txtDesc}}</span>
     </p>
     <ul>
       <li>
@@ -171,11 +171,11 @@
       </li>
       <li>
         <span>试驾到店时间:</span>
-        <span>{{testDriveInfo.testDriverTime}}</span>
+        <span>{{testDriveInfo.toStoreTime}}</span>
       </li>
       <li>
         <span>评价时间:</span>
-        <span>{{testDriveInfo.evaluationTime}}</span>
+        <span>{{testDriveInfo.yelpTime}}</span>
       </li>
     </ul>
    </div>
@@ -334,6 +334,7 @@
 
 <script>
 import * as types from '@/store/types.js'
+import {queryDefault} from '@/api/leads'
 export default {
   name:'threadInfo',
   data(){
@@ -342,9 +343,10 @@ export default {
       activeNames: ['1'],
       dialogVisible: false,
       url:'',
+      testData:'',
       // 基本信息
       basicInfo:{
-        clueId:'10017',
+        leadsId:'10017',
         vid:'vop12345678',
         clueType:'活动留资',
         channel:'汽车之家',
@@ -361,40 +363,42 @@ export default {
       intention:{
         intentionProvice:'江苏',
         intentionCity:'苏州',
-        intentionArea:'',
+        intentionCoutry:'',
         intentionSMP:'苏州威马用户中心相城店',
         intentionCardStyle:'EX5',
         intentionCarType:'EX5-续航加强版',
         intentionCarColor:'石墨黑',
         // 意向内饰
-        intentionInterior:'',
+        intentionTrim:'',
         // 意向外饰
-        intentionExteriorDecoration:'',
+        intentionExterior:'',
         // 购车预算
-        carPurchaseBudget:'',
+        buyCarBudget:'',
         // 预计购车时间
-        estimatedPurchaseTime:''
+        buyCarTime:''
       },
       // 试驾信息
       testDriveInfo:{
-        test_drive_id:'1107',
+        testDriveId:'1107',
         // 试驾人
         testDriver:'',
         testDriverPhone:'',
-        testDriverCarType:'EX5-续航加强版',
-        intentionCardStyle:'EX5',
+        testCarStyle:'EX5-续航加强版',
+        testCarType:'EX5',
+        // 试驾门店名称
+        testSmpName:'',
         //服务大使名称
-        servicePeo:'威马客服小七',
+        waiterName:'威马客服小七',
         // 车型快速评价
-        carTypeFastDesc:'双厢型小绿不错',
+        fastDesc:'双厢型小绿不错',
         // 车型文字描述
-        carTypeTxtDesc:'',
+        txtDesc:'',
         // 动作发生时间
         happenTime:'',
         // 试驾到店时间
-        testDriverTime:'',
+        toStoreTime:'',
         // 评价时间
-        evaluationTime:''
+        yelpTime:''
       },
     // 外呼跟进记录
     callFollowUp:{
@@ -461,7 +465,14 @@ export default {
           
       }
   },
-  mounted(){
+  async mounted(){
+    // 求库
+    let res = await queryDefault()
+    this.basicInfo = res.data.data.baseInfo
+    this.intention = res.data.data.intentionInfo
+    this.testDriveInfo = res.data.data.testDriveInfo
+    
+    console.log(res.data.data)
     // 生成面包屑信息
     this.breadcrumb = decodeURI(this.$route.path.split('/').splice(2))
     this.breadcrumb = this.breadcrumb.split(',')

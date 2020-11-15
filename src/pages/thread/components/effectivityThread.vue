@@ -8,14 +8,17 @@
      :drawer="drawer"
     />
     <!-- 检索信息输入 -->
-    <Check-info/>
+    <Check-info
+    @updList = "updList"
+    reqMethods="queryEffective"
+    />
     <!-- 检索列表 -->
     <div class="vop_serarchList"
       :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
     >
      <el-table
       :height="height"
-      :data="tableData"
+      :data="testData.total ? testData.list : tableData "
       style="width: 100% ; margin-top:20px;"
       @selection-change="handleSelectionChange"
     >
@@ -27,19 +30,19 @@
       
     </el-table-column>
     <el-table-column
-      prop="threadId"
+      prop="leadsId"
       label="线索ID"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="type"
+      prop="leadsType"
       label="线索类型"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="VopId"
+      prop="vid"
       label="VOP ID"
       min-width="120">
     </el-table-column>
@@ -57,25 +60,25 @@
     </el-table-column>
 
     <el-table-column
-      prop="province"
+      prop="intentionProvinceName"
       label="意向省份"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="city"
+      prop="intentionCityName"
       label="意向城市"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="origin"
+      prop="sourceChannelName"
       label="来源渠道"
       min-width="120">
     </el-table-column>
 
     <el-table-column
-      prop="date"
+      prop="reportTime"
       label="上报时间"
       min-width="120">
     </el-table-column>
@@ -149,6 +152,8 @@ import ExportInfo from '@/components/exportInfo/exportInfo'
 
 /****/ 
 import {mapState} from 'vuex'
+import * as types from '@/store/types.js'
+
 export default {
   name:"effectivityThread",
   data(){
@@ -161,6 +166,7 @@ export default {
      multipleSelection: new Array(),
      vopId:'',
      drawer:false,
+     testData:[],
      tableData:[{
           threadId: '11001',
           date: '2016-05-01',
@@ -188,16 +194,16 @@ export default {
       }],
     }
   },
-  mounted(){
-  },
-  beforeupdate(vopId, tableData){
-  },
   computed:{
     ...mapState([
       'serarchList'
     ])
   },
   methods:{
+    // 更新列表
+    updList(date){
+      this.testData = date
+    },
     // 批量导出
     handleRow(){
       if(this.multipleSelection.length === 0){
@@ -244,6 +250,8 @@ export default {
         // rows.splice(index, 1);
         console.log(index, rows)
      }
+  },
+  watch:{
   },
   components:{HeaderInfo , CheckInfo  , PagIng , Issue , ExportInfo}
 }
