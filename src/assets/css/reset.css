@@ -31,13 +31,13 @@ a{text-decoration:none;}
     height:0;
 }
 /* 最大屏幕分辨率为1280px */
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
 	body{
         width:1536px;
     }
-}
+} */
 /*最小屏幕分辩率为960px 最大屏幕分辨率为1280px*/
-@media (min-width: 1000px) and (max-width:1280px) {
+/* @media (min-width: 1000px) and (max-width:1280px) {
     body{
         width:100%;
     }
@@ -50,19 +50,19 @@ a{text-decoration:none;}
     .vop_nav{
         margin:0 7% 0 7% !important;
     }
-}
+} */
 /*最小屏幕分辩率为1280px 最大屏幕分辨率为1536px*/
-@media (min-width: 1280px) and (max-width: 1536px) {
+/* @media (min-width: 1280px) and (max-width: 1536px) {
 	body{
         width:1536px;
     }
-}
+} */
 /* 最小屏幕分辨率为1536px */
-@media (min-width: 1536px) {
+/* @media (min-width: 1536px) {
 	body{
         width:100%;
     }
-}
+} */
 
 
 /* 修改一些element样式 */

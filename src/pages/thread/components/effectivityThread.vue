@@ -10,7 +10,9 @@
     <!-- 检索信息输入 -->
     <Check-info/>
     <!-- 检索列表 -->
-    <div class="vop_serarchList">
+    <div class="vop_serarchList"
+      :class="tableData.length > 6 ? 'vop_serarchList2' : ''"
+    >
      <el-table
       :height="height"
       :data="tableData"
@@ -171,68 +173,7 @@ export default {
           name:'小绿',
           evaluate:'一般般~',
           empower:'是'
-        }, {
-          threadId: '11001',
-          date: '2016-05-02',
-          VopId: '威马307',
-          phone: '86-13734656689',
-          city: '南京市',
-          origin: '门店质询',
-          province: "上海市",
-          type:'白名单线索',
-          name:'小绿',
-          evaluate:'一般般~',
-          empower:'是'
-        }, {
-          threadId: '11001',
-          date: '2016-05-04',
-          VopId: '威马007',
-          phone: '86-13734656689',
-          city: '南京市',
-          origin: '门店质询',
-          province: "上海市",
-          type:'白名单线索',
-          name:'小绿',
-          evaluate:'一般般~',
-          empower:'是'
-        }, {
-          threadId: '11001',
-          date: '2016-05-01',
-          VopId: '威马007',
-          phone: '86-13734656689',
-          city: '南京市',
-          origin: '门店质询',
-          province: "上海市",
-          type:'白名单线索',
-          name:'小绿',
-          evaluate:'一般般~',
-          empower:'是'
-        }, {
-          threadId: '11001',
-          date: '2016-05-08',
-          VopId: '威马005',
-          phone: '86-13734656689',
-          city: '南京市',
-          origin: '门店质询',
-          province: "上海市",
-          type:'白名单线索',
-          name:'小绿',
-          evaluate:'一般般~',
-          empower:'是'
-
-        }, {
-          threadId: '11001',
-          date: '2016-05-06',
-          VopId: '威马001',
-          phone: '86-13734656689',
-          city: '南京市',
-          origin: '门店质询',
-          province: "上海市",
-          type:'白名单线索',
-          name:'小绿',
-          evaluate:'一般般~',
-          empower:'是'
-        }, {
+        },{
           threadId: '11001',
           date: '2016-05-07',
           VopId: '威马000',
@@ -312,13 +253,22 @@ export default {
 .vop_effectivityThread{
   height:98%;
   .vop_serarchList{
-    height:59%;
-    /deep/.el-table {
+    margin-top:10px;
+    height:63%;
+     /deep/.el-table {
+      height:100% !important;
+    }
+  }
+  .vop_serarchList2{
+     /deep/.el-table {
       height:100% !important;
     }
     /deep/.el-table__body, /deep/.el-table__footer, /deep/.el-table__header{
       height:100% !important;
     }
-  }}
+  }
+  
+  
+  }
   
 </style>

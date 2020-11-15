@@ -155,40 +155,50 @@ export default {
 <style lang="scss">
 .vop_checkInfo{
   display:flex;
+  height:25%;
+  align-items: center;
   background: white;
   border:1px solid #d7d7d7;
+  padding-left:2%;
 }
 .vop_checkInfo_query{
-  padding:0 0 29px 29px;
-  margin:56px 20px 0 0;
+  // padding:0 0 29px 29px;
+  // margin:56px 20px 0 0;
   width:20%;
 }
 .vop_checkInfo_main{
-  width:100%;
+  width:80%;
    &>div{
     display: flex;
     width: 90%;
   }
+  // height:100%;
   flex-wrap: wrap;
-  padding:0 0 29px 29px;
-  margin-top:22px;
+  padding-left:0 0 29px 29px;
+  // margin-top:22px;
 }
 .vop_checkInfo_item{
   display: flex;
   align-items: center;
-  width:320px;
+  width:30%;
   margin:25px 19px 0 0;
   .vop_checkInfo_items{
     display: inline-block;
-    width:70px;
+    width:30%;
+    // text-align: right;
+    font-size:0.2em
   }
 }
 
 
 // 修改一些element的样式
-.el-input , .el-select{
+.el-input{
   display: inline-block;
-  width:232px;
+  // width:60%;
+  // height:120%;
+  /deep/input{
+    // height:100%;
+  }
 }
 .el-input__inner{
   border-radius: 0;

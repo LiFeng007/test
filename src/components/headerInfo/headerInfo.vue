@@ -289,10 +289,10 @@
             <el-select v-model="isAgreement" placeholder="请选择" filterable clearable	>
               <el-option
                 label="是"
-                value="否">
+                value="是">
               </el-option>
               <el-option
-                label="是"
+                label="否"
                 value="否">
               </el-option>
             </el-select>
@@ -303,10 +303,10 @@
             <el-select v-model="isPhoneVerification" placeholder="请选择" filterable clearable	>
               <el-option
                 label="是"
-                value="否">
+                value="是">
               </el-option>
               <el-option
-                label="是"
+                label="否"
                 value="否">
               </el-option>
             </el-select>
@@ -336,10 +336,10 @@
             <el-select v-model="isMobList" placeholder="请选择" filterable clearable	>
               <el-option
                 label="是"
-                value="否">
+                value="是">
               </el-option>
               <el-option
-                label="是"
+                label="否"
                 value="否">
               </el-option>
             </el-select>

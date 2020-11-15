@@ -46,7 +46,8 @@ export default {
 /* header */
 .vop_header{
    display: flex;
-   width: 100%;
+   justify-content: space-between;
+   padding: 0 20px;
     left: 0px;
     top: 0px;
     height: 40px;
@@ -90,7 +91,7 @@ export default {
 
   /****用户操作*****/  
    .vop_user{
-    margin-left:79%;
+    // margin-left:79%;
     padding:6px 0 8px 0 ;
     position: relative;
     div{
@@ -153,6 +154,7 @@ export default {
   justify-content: space-between;
   margin-top:55px;
   div{
+    margin-left:20px;
     width:436px;
     height:208px;
     background: #d7d7d7;

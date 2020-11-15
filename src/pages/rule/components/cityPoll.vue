@@ -567,8 +567,7 @@ export default {
 }
 .vop_serarchList{
     margin-top:10px;
-    height:56%;
-    -moz-height:360px;
+    height:65%;
      /deep/.el-table {
       height:100% !important;
     }

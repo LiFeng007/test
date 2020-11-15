@@ -4,7 +4,7 @@
     :list="data"
     />
     <div class="vop_rule_right">
-      <router-view style="height:100%;" />
+      <router-view />
     </div>
   </div>
 </template>
@@ -49,15 +49,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-  .vop_rule{
+ .vop_rule{
     display: flex;
     height:calc(100% - 40px);
-    overflow: hidden;
+    overflow: auto;
     .vop_rule_right{
-      padding:20px 56px 0 27px;
-      height:100%;
       width:100%;
+      padding:20px 56px 0 27px;
+      height:calc(100% - 20px);
       overflow-y: auto;
+      &>div:first-child{
+        height:90%;
+      }
     }
   }
 </style>
