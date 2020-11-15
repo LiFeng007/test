@@ -6,24 +6,24 @@
          <!-- 线索ID -->
         <div class="vop_checkInfo_item">
           <span class="vop_checkInfo_items">线索ID</span>
-          <el-input v-model="threadId" placeholder="请输入内容"></el-input>
+          <el-input v-model="threadId" placeholder="请输入内容" class="vop_input"></el-input>
         </div>
         <!-- VOP ID -->
         <div class="vop_checkInfo_item">
           <span class="vop_checkInfo_items">VOP ID</span>
-          <el-input v-model="VopId" placeholder="请输入内容"></el-input>
+          <el-input v-model="VopId" placeholder="请输入内容" class="vop_input"></el-input>
         </div>
         <!-- 手机号 -->
         <div class="vop_checkInfo_item">
           <span class="vop_checkInfo_items">手机号</span>
-          <el-input v-model="phone" placeholder="请输入内容"></el-input>
+          <el-input v-model="phone" placeholder="请输入内容" class="vop_input"></el-input>
         </div>
     </div>
       <div>
         <!-- 来源渠道 -->
         <div class="vop_checkInfo_item">
           <span class="vop_checkInfo_items">来源渠道</span>
-          <el-input v-model="origin" placeholder="请输入内容"></el-input>
+          <el-input v-model="origin" placeholder="请输入内容" class="vop_input"></el-input>
         </div>
         <!-- 意向省份 -->
         <div class="vop_checkInfo_item">
@@ -34,6 +34,7 @@
                 filterable 
                 placeholder="请选择"
                 clearable
+                class="vop_select"
                 >
                 <el-option
                 :key="index"
@@ -52,6 +53,7 @@
               filterable 
               placeholder="请选择"
               clearable
+              class="vop_select"
               >
                 <el-option
                   v-for="(item , index) in citys"
@@ -168,9 +170,12 @@ export default {
 }
 .vop_checkInfo_main{
   width:80%;
+  height:100%;
    &>div{
     display: flex;
     width: 90%;
+    height:50%;
+    align-items: center;
   }
   // height:100%;
   flex-wrap: wrap;
@@ -180,24 +185,36 @@ export default {
 .vop_checkInfo_item{
   display: flex;
   align-items: center;
+  height:20%;
   width:30%;
-  margin:25px 19px 0 0;
+  margin-right:2%;
+  // margin:25px 19px 0 0;
   .vop_checkInfo_items{
     display: inline-block;
-    width:30%;
+    width:40%;
     // text-align: right;
-    font-size:0.2em
+    font-size:0.4em;
+     overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
   }
 }
 
 
 // 修改一些element的样式
-.el-input{
+.vop_input{
   display: inline-block;
-  // width:60%;
+  width:60%;
+  // height:20%;
   // height:120%;
   /deep/input{
-    // height:100%;
+    width:100%;
+  }
+}
+.vop_select{
+  // width:100%;
+  /deep/.el-input{
+    // width:100%;
   }
 }
 .el-input__inner{

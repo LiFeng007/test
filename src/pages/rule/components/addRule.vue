@@ -484,7 +484,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       li{
-        width:40%;
+        width:50%;
         text-align: right;
         margin-top:20px;
         .el-select , .el-input{

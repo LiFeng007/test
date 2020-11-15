@@ -393,6 +393,9 @@ export default {
       height:100% !important;
     }
   }
+  .vop_checkInfo_item{
+    margin-right:2%;
+  }
   .vop_serarchList2{
      /deep/.el-table {
       height:100% !important;

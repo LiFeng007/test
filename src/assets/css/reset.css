@@ -105,3 +105,6 @@ a{text-decoration:none;}
     background:#30BF94;
     border:1px solid #30BF94;
 }
+.el-input{
+    width:auto;
+}

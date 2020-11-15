@@ -532,6 +532,9 @@ export default {
     background:#169bd5;
   }  
   i{color:#e66b5b;margin-right:3px}
+     .vop_checkInfo_item{
+    margin-right:2%;
+  }
   // 修改城市门店弹出框
   .vop_city_poll_upd {
     height:440px;
@@ -542,6 +545,7 @@ export default {
         width:130px;
       }
     }
+  
     /deep/.el-dialog{height:100%;margin-top:30px !important}
     ul{
       

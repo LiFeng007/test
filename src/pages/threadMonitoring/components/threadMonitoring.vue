@@ -195,8 +195,8 @@ export default {
     }
   },
   created(){
-    let heightStyle = this.$refs.vop_threadMonitoring_List.clientHeight
-    this.height = heightStyle + 'px'
+    // let heightStyle = this.$refs.vop_threadMonitoring_List.clientHeight
+    // this.height = heightStyle + 'px'
   },
   mounted(){
     this.getSpanArr(this.tableData)
@@ -280,7 +280,7 @@ export default {
 .vop_leads_monitoring{
   height:98%;
   .vop_threadMonitoring_List{
-    height:70%;
+    height:66%;
     /deep/.el-table {
       height:100% !important;
     }
@@ -290,6 +290,9 @@ export default {
   }
 
   .vop_leads_circulation{
+      padding:12px 15px 10px 20px;
+      height:20%;
+      background:white;
     /deep/.el-date-editor{
       width:500px;
       height:50px;
@@ -297,16 +300,13 @@ export default {
     /deep/.el-range-separator{
       line-height:41px
     }
-    padding:12px 15px 10px 20px;
-    height:120px;
-    background:white;
     span{
     margin-right:40px;
     font-size:14px;
     }
     article{
       text-align: right;
-      margin-top:30px;
+      margin-top:1.5%;
       /deep/.el-button{
         width:120px
       }
